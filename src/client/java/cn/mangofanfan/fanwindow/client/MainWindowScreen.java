@@ -17,6 +17,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextIconButtonWidget;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.TextureManager;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class MainWindowScreen extends Screen {
     // 定位点
@@ -156,7 +156,12 @@ public class MainWindowScreen extends Screen {
                         client.setScreen((Screen) ModsScreen.getDeclaredConstructor(paramTypes).newInstance(this));
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                              NoSuchMethodException e) {
-                        throw new RuntimeException(e);
+                        logger.error("Could not instantiate ModsScreen while ModMenu is already loaded : ", e);
+                        client.getToastManager().
+                                add(SystemToast.create(client,
+                                        SystemToast.Type.UNSECURE_SERVER_WARNING,
+                                        Text.translatable("fanwindow.modmenu.modsScreenFailed.title"),
+                                        Text.translatable("fanwindow.modmenu.modsScreenFailed.description")));
                     }
                 });
         builder.dimensions(cenX, cenY + 130, 60, 27);

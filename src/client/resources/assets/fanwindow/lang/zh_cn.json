@@ -1,4 +1,6 @@
 {
   "modmenu.nameTranslation.fanwindow": "芒果窗",
-  "modmenu.descriptionTranslation.fanwindow": "拥有与众不同的标题屏幕吧！"
+  "modmenu.descriptionTranslation.fanwindow": "拥有与众不同的标题屏幕吧！",
+  "fanwindow.modmenu.modsScreenFailed.title": "与[模组菜单]的联动出现错误",
+  "fanwindow.modmenu.modsScreenFailed.description": "实例化模组屏幕时出现异常，请向[芒果窗]反馈此问题。"
 }
