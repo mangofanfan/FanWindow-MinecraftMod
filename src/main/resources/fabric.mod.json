@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "fanwindow",
+  "version": "${version}",
+  "name": "FanWindow",
+  "description": "Have a different Title Screen !",
+  "authors": [
+    {
+      "name": "MangoFanFanw",
+      "contact": {
+        "email": "mangofanfanw@icloud.com"
+      }
+    }
+  ],
+  "contact": {
+    "homepage": "https://mangofanfan.cn/"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/fanwindow/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "cn.mangofanfan.fanwindow.client.FanwindowDataGenerator"
+    ],
+    "client": [
+      "cn.mangofanfan.fanwindow.client.FanwindowClient"
+    ],
+    "main": [
+      "cn.mangofanfan.fanwindow.Fanwindow"
+    ]
+  },
+  "mixins": [
+    "fanwindow.mixins.json",
+    {
+      "config": "fanwindow.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "suggests": {
+    "modmenu": ">=${modmenu_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "website": "https://mangofanfan.cn/"
+      }
+    }
+  }
+}
