@@ -2,5 +2,10 @@
   "modmenu.nameTranslation.fanwindow": "FanWindow",
   "modmenu.descriptionTranslation.fanwindow": "Have a different Title Screen !",
   "fanwindow.modmenu.modsScreenFailed.title": "Error occurred when working with [ModMenu].",
-  "fanwindow.modmenu.modsScreenFailed.description": "Exception occurred when trying to init ModsScreen. Please contact with [FanWindow]."
+  "fanwindow.modmenu.modsScreenFailed.description": "Exception occurred when trying to init ModsScreen. Please contact with [FanWindow].",
+  "fanwindow.config": "Window Config",
+  "fanwindow.config.title": "FanWindow Config",
+  "fanwindow.config.useNewTitleScreen": "Use New FanWindow Title Screen",
+  "fanwindow.config.useNewTitleScreen.description": "New Title Screen will replace valiant Title Screen.",
+  "fanwindow.config.general": "General Config"
 }

@@ -1,5 +1,6 @@
-package cn.mangofanfan.fanwindow.client;
+package cn.mangofanfan.fanwindow.client.screen;
 
+import cn.mangofanfan.fanwindow.client.GlobalState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.LogoDrawer;
@@ -16,7 +17,6 @@ import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextIconButtonWidget;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -50,10 +50,12 @@ public class MainWindowScreen extends Screen {
     private volatile TextIconButtonWidget accessibilityOptionButton;
     // 版权
     private volatile ButtonWidget copyrightButton;
+    // 设置按钮
+    private volatile ButtonWidget configButton;
     // ModMenu支持
     private volatile ButtonWidget modMenuButton;
 
-    private GlobalState globalState;
+    private final GlobalState globalState;
     private static final Logger logger = LoggerFactory.getLogger(MainWindowScreen.class);
     private static final MinecraftClient client = MinecraftClient.getInstance();
 
@@ -62,16 +64,6 @@ public class MainWindowScreen extends Screen {
         globalState = GlobalState.getInstance();
         logoDrawer = new LogoDrawer(false);
         bgTexture = Identifier.of("fanwindow", "textures/gui/bg_1.21.png");
-    }
-
-    public MainWindowScreen() {
-        this(Text.of(">_<"));
-    }
-
-    public static void registerTextures(TextureManager textureManager) {
-        textureManager.registerTexture(LogoDrawer.LOGO_TEXTURE);
-        textureManager.registerTexture(LogoDrawer.EDITION_TEXTURE);
-        PANORAMA_RENDERER.registerTextures(textureManager);
     }
 
     @Override
@@ -97,9 +89,7 @@ public class MainWindowScreen extends Screen {
                 .dimensions(cenX, cenY + 65, 60, 60)
                 .build();
         this.quitButton = ButtonWidget.builder(Text.translatable("menu.quit"),
-                button -> {
-                    client.scheduleStop();
-                })
+                button -> client.scheduleStop())
                 .dimensions(cenX + 65, cenY + 65, 60, 60)
                 .build();
         this.toggleButton = ButtonWidget.builder(Text.of("</>"),
@@ -135,7 +125,7 @@ public class MainWindowScreen extends Screen {
         this.addDrawableChild(accessibilityOptionButton);
         this.addDrawableChild(copyrightButton);
 
-        // 如果有ModMenu则添加按钮
+        // 如果有ModMenu则添加打开ModsScreen的按钮
         if (globalState.isModMenuSupport()) {
             try {
                 Class<?> ModsScreen = Class.forName("com.terraformersmc.modmenu.gui.ModsScreen");
@@ -147,13 +137,27 @@ public class MainWindowScreen extends Screen {
                 logger.error("Could not load ModsScreen while ModMenu is already loaded : ", e);
             }
         }
+        // 否则添加打开本模组配置页面的按钮
+        else {
+            this.configButton = ButtonWidget.builder(Text.translatable("fanwindow.config"),
+                            button -> {
+                                ConfigManager configManager = ConfigManager.getInstance();
+                                client.setScreen(configManager.getScreen(this));
+                                logger.debug("Open FanWindow ConfigScreen from FanWindow Title Screen.");
+                            })
+                    .dimensions(cenX, cenY + 130, 60, 27)
+                    .build();
+            this.addDrawableChild(configButton);
+        }
     }
 
+    // 此方法只用来打开ModsScreen屏幕
     private ButtonWidget.@NotNull Builder getBuilder(Class<?> ModsScreen, Class<?>[] paramTypes) {
         ButtonWidget.Builder builder = ButtonWidget.builder(Text.translatable("category.modmenu.name"),
                 button -> {
                     try {
                         client.setScreen((Screen) ModsScreen.getDeclaredConstructor(paramTypes).newInstance(this));
+                        logger.debug("Open ModsScreen from FanWindow Title Screen.");
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                              NoSuchMethodException e) {
                         logger.error("Could not instantiate ModsScreen while ModMenu is already loaded : ", e);

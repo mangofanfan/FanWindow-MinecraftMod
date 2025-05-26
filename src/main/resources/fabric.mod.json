@@ -27,6 +27,9 @@
     ],
     "main": [
       "cn.mangofanfan.fanwindow.Fanwindow"
+    ],
+    "modmenu": [
+      "cn.mangofanfan.fanwindow.modmenu.FanWindowMenuApiImpl"
     ]
   },
   "mixins": [
@@ -39,7 +42,8 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_version}",
+    "cloth-config": "${cloth_config_api_version}"
   },
   "suggests": {
     "modmenu": ">=${modmenu_version}"

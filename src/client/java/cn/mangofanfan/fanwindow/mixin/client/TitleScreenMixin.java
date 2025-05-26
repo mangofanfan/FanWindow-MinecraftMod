@@ -1,7 +1,7 @@
 package cn.mangofanfan.fanwindow.mixin.client;
 
 import cn.mangofanfan.fanwindow.client.GlobalState;
-import cn.mangofanfan.fanwindow.client.MainWindowScreen;
+import cn.mangofanfan.fanwindow.client.screen.MainWindowScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
