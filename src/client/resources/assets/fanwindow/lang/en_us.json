@@ -6,6 +6,6 @@
   "fanwindow.config": "Window Config",
   "fanwindow.config.title": "FanWindow Config",
   "fanwindow.config.useNewTitleScreen": "Use New FanWindow Title Screen",
-  "fanwindow.config.useNewTitleScreen.description": "New Title Screen will replace valiant Title Screen.",
+  "fanwindow.config.useNewTitleScreen.description": "New Title Screen will replace vanilla Title Screen.",
   "fanwindow.config.general": "General Config"
 }
