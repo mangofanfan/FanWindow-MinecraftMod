@@ -2,6 +2,11 @@ package cn.mangofanfan.fanwindow.client.config;
 
 import java.util.ArrayList;
 
+
+/**
+ * 模组配置中，背景图片的枚举类，包含模组提供的背景图片。
+ * Minecraft要求图片资源必须为png格式，因此枚举项均以_png结尾。
+ */
 public enum BgPicture {
     /**
      * 勇气之袋的官方艺术作品 1.21.2
@@ -20,6 +25,10 @@ public enum BgPicture {
      */
     Tricky_Trials_Artwork_png;
 
+    /**
+     * 获取文件名组成的ArrayList，文件名通过getPicName获取，格式后缀为.png
+     * @return ArrayList<String>，由全部图片名称组成。
+     */
     public static Iterable<String> getValues() {
         ArrayList<String> values = new ArrayList<>();
         for (BgPicture bgPicture : BgPicture.values()) {
@@ -28,6 +37,10 @@ public enum BgPicture {
         return values;
     }
 
+    /**
+     * 获取图片的全名，格式后缀还原为.png
+     * @return String，文件名
+     */
     public String getPicName() {
         return this.toString().replace("_png", ".png");
     }

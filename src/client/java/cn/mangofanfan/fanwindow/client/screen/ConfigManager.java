@@ -20,17 +20,25 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+
+/**
+ * ConfigManager负责本模组的配置的获取、配置文件读写，以及获取配置屏幕。
+ * 使用单例模式确保安全使用。
+ */
 public class ConfigManager {
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("fanwindow.json");
     private static ConfigManager instance;
     private final ConfigBuilder configBuilder;
     private final ConfigCategory generalCategory;
 
+    /**
+     * 通过ConfigManager中的config属性访问FanWindowConfig。
+     */
     public FanWindowConfig config;
 
     static Logger logger = LoggerFactory.getLogger(ConfigManager.class);
 
-    public ConfigManager() {
+    private ConfigManager() {
         configBuilder = ConfigBuilder.create().setTitle(Text.translatable("fanwindow.config.title"));
         generalCategory = configBuilder.getOrCreateCategory(Text.translatable("fanwindow.config.general"));
         if (config == null) {

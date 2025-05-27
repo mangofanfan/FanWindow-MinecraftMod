@@ -64,7 +64,7 @@ public class NewTitleScreen extends Screen {
         super(title);
         globalState = GlobalState.getInstance();
         logoDrawer = new LogoDrawer(false);
-        configManager = new ConfigManager();
+        configManager = ConfigManager.getInstance();
         bgTexture = Identifier.of("fanwindow", configManager.config.getBgPicture().getPath());
     }
 
