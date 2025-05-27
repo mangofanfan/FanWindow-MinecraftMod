@@ -26,13 +26,14 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class MainWindowScreen extends Screen {
+public class NewTitleScreen extends Screen {
     // 定位点
     private int cenX;
     private int cenY;
 
     Identifier bgTexture;
     private final LogoDrawer logoDrawer;
+    ConfigManager configManager;
 
     // 单人游戏
     private volatile ButtonWidget singlePlayerButton;
@@ -56,14 +57,15 @@ public class MainWindowScreen extends Screen {
     private volatile ButtonWidget modMenuButton;
 
     private final GlobalState globalState;
-    private static final Logger logger = LoggerFactory.getLogger(MainWindowScreen.class);
+    private static final Logger logger = LoggerFactory.getLogger(NewTitleScreen.class);
     private static final MinecraftClient client = MinecraftClient.getInstance();
 
-    public MainWindowScreen(Text title) {
+    public NewTitleScreen(Text title) {
         super(title);
         globalState = GlobalState.getInstance();
         logoDrawer = new LogoDrawer(false);
-        bgTexture = Identifier.of("fanwindow", "textures/gui/bg_1.21.png");
+        configManager = new ConfigManager();
+        bgTexture = Identifier.of("fanwindow", configManager.config.getBgPicture().getPath());
     }
 
     @Override

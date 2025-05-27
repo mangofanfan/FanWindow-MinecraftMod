@@ -6,6 +6,11 @@
   "fanwindow.config": "窗口设置",
   "fanwindow.config.title": "芒果窗 设置",
   "fanwindow.config.useNewTitleScreen": "使用新的芒果窗标题屏幕",
-  "fanwindow.config.useNewTitleScreen.description": "新标题屏幕会替换原版标题屏幕。",
-  "fanwindow.config.general": "总体设置"
+  "fanwindow.config.useNewTitleScreen.description": "新标题屏幕会替换原版标题屏幕。\n若关闭，你仍然可以通过按钮切换标题屏幕。",
+  "fanwindow.config.general": "总体设置",
+  "fanwindow.config.description": "芒果窗是一个只负责修改客户端屏幕的模组。如有任何问题，请与我联系。",
+  "fanwindow.config.background": "选择背景图片",
+  "fanwindow.config.background.description": "这里的图片将会作为新标题屏幕的背景。",
+  "fanwindow.config.background.errorToast.title": "背景图片名不存在！",
+  "fanwindow.config.background.errorToast.description": "请检查拼写，或使用补全。"
 }

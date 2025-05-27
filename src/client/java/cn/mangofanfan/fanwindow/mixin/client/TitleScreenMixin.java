@@ -2,7 +2,7 @@ package cn.mangofanfan.fanwindow.mixin.client;
 
 import cn.mangofanfan.fanwindow.client.GlobalState;
 import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
-import cn.mangofanfan.fanwindow.client.screen.MainWindowScreen;
+import cn.mangofanfan.fanwindow.client.screen.NewTitleScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -34,7 +34,7 @@ public class TitleScreenMixin extends Screen {
         ButtonWidget toggleButton = ButtonWidget.builder(Text.of(">_<"),
                         (ButtonWidget button) -> {
             globalState.setNewMainWindowInUse(true);
-            MinecraftClient.getInstance().setScreen(new MainWindowScreen(Text.of(">_<")));
+            MinecraftClient.getInstance().setScreen(new NewTitleScreen(Text.of(">_<")));
         })
                 .dimensions(0, 0, 30, 30).build();
         this.addDrawableChild(toggleButton);
@@ -45,7 +45,7 @@ public class TitleScreenMixin extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     private void afterInit(CallbackInfo ci) {
         // 若设置中禁用新版TitleScreen则使用原版TitleScreen
-        if (!configManager.config.useNewTitleScreen) {
+        if (!configManager.config.isUseNewTitleScreen()) {
             logger.info("Use vanilla Title Screen due to config...");
             return;
         }
@@ -53,10 +53,10 @@ public class TitleScreenMixin extends Screen {
         // 启动游戏、建立TitleScreen时
         if (!globalState.isStarted()) {
             logger.info("Change to MainWindowScreen...");
-            MinecraftClient.getInstance().setScreen(new MainWindowScreen(Text.of(">_<")));
+            MinecraftClient.getInstance().setScreen(new NewTitleScreen(Text.of(">_<")));
         } else if (globalState.isNewMainWindowInUse()) {
             logger.info("Back to MainWindowScreen...");
-            MinecraftClient.getInstance().setScreen(new MainWindowScreen(Text.of(">_<")));
+            MinecraftClient.getInstance().setScreen(new NewTitleScreen(Text.of(">_<")));
         } else {
             logger.info("Return vanilla Title Screen.");
         }

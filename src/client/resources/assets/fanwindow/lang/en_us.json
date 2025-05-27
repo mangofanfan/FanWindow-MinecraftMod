@@ -6,6 +6,11 @@
   "fanwindow.config": "Window Config",
   "fanwindow.config.title": "FanWindow Config",
   "fanwindow.config.useNewTitleScreen": "Use New FanWindow Title Screen",
-  "fanwindow.config.useNewTitleScreen.description": "New Title Screen will replace vanilla Title Screen.",
-  "fanwindow.config.general": "General Config"
+  "fanwindow.config.useNewTitleScreen.description": "New Title Screen will replace vanilla Title Screen.\nIf off, you can still toggle Title Screen through button.",
+  "fanwindow.config.general": "General Config",
+  "fanwindow.config.description": "FanWindow is a mod only for redesigning your client screen. Contact with me for any problem.",
+  "fanwindow.config.background": "Choose background picture",
+  "fanwindow.config.background.description": "Pictures here will be shown as the background of New Title Screen.",
+  "fanwindow.config.background.errorToast.title": "Background picture name Not Existed!",
+  "fanwindow.config.background.errorToast.description": "Please check your spell again, or use completion."
 }

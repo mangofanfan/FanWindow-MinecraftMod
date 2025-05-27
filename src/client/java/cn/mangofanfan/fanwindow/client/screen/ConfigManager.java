@@ -1,12 +1,15 @@
 package cn.mangofanfan.fanwindow.client.screen;
 
+import cn.mangofanfan.fanwindow.client.config.BgPicture;
 import cn.mangofanfan.fanwindow.client.config.FanWindowConfig;
 import com.google.gson.Gson;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,12 +76,35 @@ public class ConfigManager {
     private void initConfigOptions() {
         ConfigEntryBuilder entryBuilder = ConfigEntryBuilder.create();
         generalCategory.addEntry(entryBuilder.startBooleanToggle(
-                        Text.translatable("fanwindow.config.useNewTitleScreen"),
-                        config.useNewTitleScreen
-                )
-                .setDefaultValue(false)
-                .setTooltip(Text.translatable("fanwindow.config.useNewTitleScreen.description"))
-                        .setSaveConsumer(newValue -> config.useNewTitleScreen = newValue)
-                .build());
+                                Text.translatable("fanwindow.config.useNewTitleScreen"),
+                                config.isUseNewTitleScreen()
+                        )
+                        .setDefaultValue(false)
+                        .setTooltip(Text.translatable("fanwindow.config.useNewTitleScreen.description"))
+                        .setSaveConsumer(newValue -> config.setUseNewTitleScreen(newValue))
+                        .build());
+        generalCategory.addEntry(entryBuilder.startStringDropdownMenu(Text.translatable("fanwindow.config.background"),
+                                config.getBgPicture().getPicName())
+                        .setDefaultValue(config.getBgPicture().getPicName())
+                        .setSelections(BgPicture.getValues())
+                        .setTooltip(Text.translatable("fanwindow.config.background.description"))
+                        .setSaveConsumer(this::saveBgPicture)
+                        .build());
+        generalCategory.addEntry(entryBuilder.startTextDescription(Text.translatable("fanwindow.config.description")).build());
+    }
+
+    private void saveBgPicture(String value) {
+        try {
+            config.setBgPicture(value);
+        } catch (IllegalArgumentException e) {
+            MinecraftClient client = MinecraftClient.getInstance();
+            client.getToastManager().add(
+                    SystemToast.create(client,
+                            SystemToast.Type.UNSECURE_SERVER_WARNING,
+                            Text.translatable("fanwindow.config.background.errorToast.title"),
+                            Text.translatable("fanwindow.config.background.errorToast.description"))
+            );
+            logger.error("IllegalArgumentException occurred when saving bg picture!", e);
+        }
     }
 }
