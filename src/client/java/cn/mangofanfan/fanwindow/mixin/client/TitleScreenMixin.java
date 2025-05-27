@@ -1,6 +1,7 @@
 package cn.mangofanfan.fanwindow.mixin.client;
 
 import cn.mangofanfan.fanwindow.client.GlobalState;
+import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
 import cn.mangofanfan.fanwindow.client.screen.MainWindowScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -20,14 +21,15 @@ public class TitleScreenMixin extends Screen {
     @Unique
     Logger logger;
     @Unique
-    GlobalState globalState;
+    GlobalState globalState = GlobalState.getInstance();
+    @Unique
+    ConfigManager configManager = ConfigManager.getInstance();
     protected TitleScreenMixin(Text title) {
         super(title);
     }
 
     @Inject(method = "init", at = @At("HEAD"))
     private void onInit(CallbackInfo ci) {
-        globalState = GlobalState.getInstance();
         // create toggle button
         ButtonWidget toggleButton = ButtonWidget.builder(Text.of(">_<"),
                         (ButtonWidget button) -> {
@@ -42,15 +44,21 @@ public class TitleScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At("RETURN"))
     private void afterInit(CallbackInfo ci) {
-        // toggle on once
+        // 若设置中禁用新版TitleScreen则使用原版TitleScreen
+        if (!configManager.config.useNewTitleScreen) {
+            logger.info("Use vanilla Title Screen due to config...");
+            return;
+        }
+
+        // 启动游戏、建立TitleScreen时
         if (!globalState.isStarted()) {
-            logger.info("Change to MainWindowScreen when launching...");
+            logger.info("Change to MainWindowScreen...");
             MinecraftClient.getInstance().setScreen(new MainWindowScreen(Text.of(">_<")));
         } else if (globalState.isNewMainWindowInUse()) {
             logger.info("Back to MainWindowScreen...");
             MinecraftClient.getInstance().setScreen(new MainWindowScreen(Text.of(">_<")));
         } else {
-            logger.info("Not launching, nothing to do.");
+            logger.info("Return vanilla Title Screen.");
         }
     }
 }

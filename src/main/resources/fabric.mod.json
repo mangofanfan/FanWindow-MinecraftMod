@@ -13,9 +13,11 @@
     }
   ],
   "contact": {
-    "homepage": "https://mangofanfan.cn/"
+    "homepage": "https://mangofanfan.cn/",
+    "sources": "https://github.com/mangofanfan/FanWindow-MinecraftMod",
+    "issues": "https://github.com/mangofanfan/FanWindow-MinecraftMod/issues"
   },
-  "license": "All-Rights-Reserved",
+  "license": "MIT",
   "icon": "assets/fanwindow/icon.png",
   "environment": "client",
   "entrypoints": {

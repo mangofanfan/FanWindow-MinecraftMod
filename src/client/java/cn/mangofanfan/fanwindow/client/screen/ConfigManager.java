@@ -19,10 +19,11 @@ import java.nio.file.Path;
 
 public class ConfigManager {
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("fanwindow.json");
-    private static FanWindowConfig config;
     private static ConfigManager instance;
-    ConfigBuilder configBuilder;
-    ConfigCategory generalCategory;
+    private final ConfigBuilder configBuilder;
+    private final ConfigCategory generalCategory;
+
+    public FanWindowConfig config;
 
     static Logger logger = LoggerFactory.getLogger(ConfigManager.class);
 
@@ -39,7 +40,7 @@ public class ConfigManager {
         });
     }
 
-    public static void loadConfig() {
+    public void loadConfig() {
         try (Reader reader = Files.newBufferedReader(CONFIG_PATH)) {
             config = new Gson().fromJson(reader, FanWindowConfig.class);
         } catch (IOException e) {
@@ -48,7 +49,7 @@ public class ConfigManager {
         }
     }
 
-    public static void saveConfig() {
+    public void saveConfig() {
         try (Writer writer = Files.newBufferedWriter(CONFIG_PATH)) {
             new Gson().toJson(config, writer);
         } catch (IOException e) {
