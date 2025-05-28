@@ -52,4 +52,31 @@ public enum BgPicture {
     public String getPath() {
         return "textures/artwork/" + getPicName().toLowerCase();
     }
+
+    /**
+     * 返回图片的尺寸。
+     * @return int[]，0 -> width，1 -> height。
+     */
+    public int[] getPicSize() {
+        int[] size = {0, 0};
+        switch (this) {
+            case Bundles_of_Bravery_Artwork_png:
+                size[0] = 889;
+                size[1] = 500;
+                break;
+            case Spring_to_Life_Artwork_png:
+                size[0] = 1920;
+                size[1] = 1080;
+                break;
+            case The_Garden_Awakens_Artwork_png:
+                size[0] = 1280;
+                size[1] = 720;
+                break;
+            case Tricky_Trials_Artwork_png:
+                size[0] = 2560;
+                size[1] = 1440;
+                break;
+        }
+        return size;
+    }
 }

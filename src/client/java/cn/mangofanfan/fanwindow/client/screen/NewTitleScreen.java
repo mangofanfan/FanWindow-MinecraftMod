@@ -1,6 +1,7 @@
 package cn.mangofanfan.fanwindow.client.screen;
 
 import cn.mangofanfan.fanwindow.client.GlobalState;
+import cn.mangofanfan.fanwindow.client.config.BgPicture;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.LogoDrawer;
@@ -32,6 +33,7 @@ public class NewTitleScreen extends Screen {
     private int cenY;
 
     Identifier bgTexture;
+    int[] textureSize;
     private final LogoDrawer logoDrawer;
     ConfigManager configManager;
 
@@ -65,7 +67,9 @@ public class NewTitleScreen extends Screen {
         globalState = GlobalState.getInstance();
         logoDrawer = new LogoDrawer(false);
         configManager = ConfigManager.getInstance();
-        bgTexture = Identifier.of("fanwindow", configManager.config.getBgPicture().getPath());
+        BgPicture bgPicture = configManager.config.getBgPicture();
+        bgTexture = Identifier.of("fanwindow", bgPicture.getPath());
+        textureSize = bgPicture.getPicSize();
     }
 
     @Override
@@ -190,7 +194,21 @@ public class NewTitleScreen extends Screen {
 
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
-        context.drawTexture(RenderLayer::getGuiOpaqueTexturedBackground, bgTexture, 0, 0, 0, 0, width, height, width, height);
+        // 确保渲染背景图片正确，即图片比例不变，且在裁切时总是保持中心位置。
+        int[] regionSize = {0, 0};
+        double var1 = (double) textureSize[0] / textureSize[1];
+        double var2 = (double) width / height;
+        if (var1 == var2) {
+            regionSize = textureSize;
+        } else if (var1 < var2) {
+            regionSize[0] = textureSize[0];
+            regionSize[1] = (int) (textureSize[1] / var2 * var1);
+        }
+        else {
+            regionSize[0] = (int) (textureSize[0] / var1 * var2);
+            regionSize[1] = textureSize[1];
+        }
+        context.drawTexture(RenderLayer::getGuiOpaqueTexturedBackground, bgTexture, 0, 0, (float) (textureSize[0] - regionSize[0]) / 2, (float) (textureSize[1] - regionSize[1]) / 2, width, height, regionSize[0], regionSize[1], textureSize[0], textureSize[1]);
     }
 
     @Override
