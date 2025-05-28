@@ -8,6 +8,8 @@ package cn.mangofanfan.fanwindow.client.config;
  */
 public class FanWindowConfig {
     private boolean useNewTitleScreen = true;
+    private boolean useNewBackgroundGlobally = false;
+    private boolean useNewBackgroundInNewScreen = true;
     private BgPicture bgPicture = BgPicture.Spring_to_Life_Artwork_png;
 
     public boolean isUseNewTitleScreen() {
@@ -24,5 +26,21 @@ public class FanWindowConfig {
 
     public void setBgPicture(String bgPictureName) {
         this.bgPicture = BgPicture.valueOf(bgPictureName.replace(".png", "_png"));
+    }
+
+    public boolean isUseNewBackgroundGlobally() {
+        return useNewBackgroundGlobally;
+    }
+
+    public void setUseNewBackgroundGlobally(boolean useNewBackgroundGlobally) {
+        this.useNewBackgroundGlobally = useNewBackgroundGlobally;
+    }
+
+    public boolean isUseNewBackgroundInNewScreen() {
+        return useNewBackgroundInNewScreen;
+    }
+
+    public void setUseNewBackgroundInNewScreen(boolean useNewBackgroundInNewScreen) {
+        this.useNewBackgroundInNewScreen = useNewBackgroundInNewScreen;
     }
 }

@@ -87,9 +87,25 @@ public class ConfigManager {
                                 Text.translatable("fanwindow.config.useNewTitleScreen"),
                                 config.isUseNewTitleScreen()
                         )
-                        .setDefaultValue(false)
+                        .setDefaultValue(true)
                         .setTooltip(Text.translatable("fanwindow.config.useNewTitleScreen.description"))
                         .setSaveConsumer(newValue -> config.setUseNewTitleScreen(newValue))
+                        .build());
+        generalCategory.addEntry(entryBuilder.startBooleanToggle(
+                                Text.translatable("fanwindow.config.useNewBackgroundInNewScreen"),
+                                config.isUseNewBackgroundInNewScreen()
+                        )
+                        .setDefaultValue(false)
+                        .setTooltip(Text.translatable("fanwindow.config.useNewBackgroundInNewScreen.description"))
+                        .setSaveConsumer(newValue -> config.setUseNewBackgroundInNewScreen(newValue))
+                        .build());
+        generalCategory.addEntry(entryBuilder.startBooleanToggle(
+                                Text.translatable("fanwindow.config.useNewBackgroundGlobally"),
+                                config.isUseNewBackgroundGlobally()
+                        )
+                        .setDefaultValue(false)
+                        .setTooltip(Text.translatable("fanwindow.config.useNewBackgroundGlobally.description"))
+                        .setSaveConsumer(newValue -> config.setUseNewBackgroundGlobally(newValue))
                         .build());
         generalCategory.addEntry(entryBuilder.startStringDropdownMenu(Text.translatable("fanwindow.config.background"),
                                 config.getBgPicture().getPicName())

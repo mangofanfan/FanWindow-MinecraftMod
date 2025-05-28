@@ -8,9 +8,13 @@
   "fanwindow.config.useNewTitleScreen": "Use New FanWindow Title Screen",
   "fanwindow.config.useNewTitleScreen.description": "New Title Screen will replace vanilla Title Screen.\nIf off, you can still toggle Title Screen through button.",
   "fanwindow.config.general": "General Config",
-  "fanwindow.config.description": "FanWindow is a mod only for redesigning your client screen. Contact with me for any problem.",
+  "fanwindow.config.description": "FanWindow is a mod only for redesigning your client screen. Contact with me for any problem.\nYou might need to restart Minecraft to make your changes in use.",
   "fanwindow.config.background": "Choose background picture",
-  "fanwindow.config.background.description": "Pictures here will be shown as the background of New Title Screen.",
+  "fanwindow.config.background.description": "Pictures here will be shown as the New Background.",
   "fanwindow.config.background.errorToast.title": "Background picture name Not Existed!",
-  "fanwindow.config.background.errorToast.description": "Please check your spell again, or use completion."
+  "fanwindow.config.background.errorToast.description": "Please check your spell again, or use completion.",
+  "fanwindow.config.useNewBackgroundGlobally": "Use new Background instead of vanilla screen background",
+  "fanwindow.config.useNewBackgroundGlobally.description": "New background will replace all screen that use vanilla background globally.",
+  "fanwindow.config.useNewBackgroundInNewScreen": "Use new Background in New Screen",
+  "fanwindow.config.useNewBackgroundInNewScreen.description": "Not available when 「Use new Background instead of vanilla screen background」 is enabled."
 }

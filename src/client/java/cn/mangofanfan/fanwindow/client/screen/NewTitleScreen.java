@@ -2,6 +2,7 @@ package cn.mangofanfan.fanwindow.client.screen;
 
 import cn.mangofanfan.fanwindow.client.GlobalState;
 import cn.mangofanfan.fanwindow.client.config.BgPicture;
+import cn.mangofanfan.fanwindow.client.function.RenderBackground;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.LogoDrawer;
@@ -17,7 +18,6 @@ import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextIconButtonWidget;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -194,21 +194,12 @@ public class NewTitleScreen extends Screen {
 
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float deltaTicks) {
-        // 确保渲染背景图片正确，即图片比例不变，且在裁切时总是保持中心位置。
-        int[] regionSize = {0, 0};
-        double var1 = (double) textureSize[0] / textureSize[1];
-        double var2 = (double) width / height;
-        if (var1 == var2) {
-            regionSize = textureSize;
-        } else if (var1 < var2) {
-            regionSize[0] = textureSize[0];
-            regionSize[1] = (int) (textureSize[1] / var2 * var1);
+        if (configManager.config.isUseNewBackgroundGlobally() || (!configManager.config.isUseNewBackgroundGlobally()) && !configManager.config.isUseNewBackgroundInNewScreen()) {
+            super.renderBackground(context, mouseX, mouseY, deltaTicks);
         }
         else {
-            regionSize[0] = (int) (textureSize[0] / var1 * var2);
-            regionSize[1] = textureSize[1];
+            RenderBackground.renderBackground(context, textureSize, width, height, bgTexture);
         }
-        context.drawTexture(RenderLayer::getGuiOpaqueTexturedBackground, bgTexture, 0, 0, (float) (textureSize[0] - regionSize[0]) / 2, (float) (textureSize[1] - regionSize[1]) / 2, width, height, regionSize[0], regionSize[1], textureSize[0], textureSize[1]);
     }
 
     @Override

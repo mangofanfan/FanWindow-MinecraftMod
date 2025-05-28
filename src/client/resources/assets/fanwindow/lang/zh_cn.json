@@ -8,9 +8,13 @@
   "fanwindow.config.useNewTitleScreen": "使用新的芒果窗标题屏幕",
   "fanwindow.config.useNewTitleScreen.description": "新标题屏幕会替换原版标题屏幕。\n若关闭，你仍然可以通过按钮切换标题屏幕。",
   "fanwindow.config.general": "总体设置",
-  "fanwindow.config.description": "芒果窗是一个只负责修改客户端屏幕的模组。如有任何问题，请与我联系。",
+  "fanwindow.config.description": "芒果窗是一个只负责修改客户端屏幕的模组。如有任何问题，请与我联系。\n您可能需要重新启动 Minecraft 来确保更改生效。",
   "fanwindow.config.background": "选择背景图片",
-  "fanwindow.config.background.description": "这里的图片将会作为新标题屏幕的背景。",
+  "fanwindow.config.background.description": "这里的图片将会作为新背景图片。",
   "fanwindow.config.background.errorToast.title": "背景图片名不存在！",
-  "fanwindow.config.background.errorToast.description": "请检查拼写，或使用补全。"
+  "fanwindow.config.background.errorToast.description": "请检查拼写，或使用补全。",
+  "fanwindow.config.useNewBackgroundGlobally": "使用新背景图片替换原版背景",
+  "fanwindow.config.useNewBackgroundGlobally.description": "新背景图片会全局替换任何使用原版背景的屏幕。",
+  "fanwindow.config.useNewBackgroundInNewScreen": "在新屏幕中使用新背景图片",
+  "fanwindow.config.useNewBackgroundInNewScreen.description": "若「使用新背景图片替换原版背景」启用，此配置无效。"
 }
