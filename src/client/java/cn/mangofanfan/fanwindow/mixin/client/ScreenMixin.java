@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -20,13 +21,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Screen.class)
 public abstract class ScreenMixin extends AbstractParentElement implements Drawable {
+    @Unique
+    ConfigManager configManager;
 
     @Inject(method = "renderPanoramaBackground", at = @At("HEAD"), cancellable = true)
     private void onRenderBackground(CallbackInfo ci,
                                     @Local(argsOnly = true) DrawContext context,
                                     @Local(argsOnly = true) float deltaTicks) {
         MinecraftClient client = MinecraftClient.getInstance();
-        ConfigManager configManager = ConfigManager.getInstance();
+        configManager = ConfigManager.getInstance();
         int width = client.getWindow().getScaledWidth();
         int height = client.getWindow().getScaledHeight();
         if (client.world == null) {
@@ -45,5 +48,4 @@ public abstract class ScreenMixin extends AbstractParentElement implements Drawa
             }
         }
     }
-
 }

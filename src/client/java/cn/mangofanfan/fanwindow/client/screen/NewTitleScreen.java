@@ -203,6 +203,9 @@ public class NewTitleScreen extends Screen {
     }
 
     @Override
+    protected void renderDarkening(DrawContext context) {}
+
+    @Override
     public void close() {
         if (client != null) {
             client.setScreen(new TitleScreen());

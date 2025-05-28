@@ -95,7 +95,7 @@ public class ConfigManager {
                                 Text.translatable("fanwindow.config.useNewBackgroundInNewScreen"),
                                 config.isUseNewBackgroundInNewScreen()
                         )
-                        .setDefaultValue(false)
+                        .setDefaultValue(true)
                         .setTooltip(Text.translatable("fanwindow.config.useNewBackgroundInNewScreen.description"))
                         .setSaveConsumer(newValue -> config.setUseNewBackgroundInNewScreen(newValue))
                         .build());
@@ -103,7 +103,7 @@ public class ConfigManager {
                                 Text.translatable("fanwindow.config.useNewBackgroundGlobally"),
                                 config.isUseNewBackgroundGlobally()
                         )
-                        .setDefaultValue(false)
+                        .setDefaultValue(true)
                         .setTooltip(Text.translatable("fanwindow.config.useNewBackgroundGlobally.description"))
                         .setSaveConsumer(newValue -> config.setUseNewBackgroundGlobally(newValue))
                         .build());
