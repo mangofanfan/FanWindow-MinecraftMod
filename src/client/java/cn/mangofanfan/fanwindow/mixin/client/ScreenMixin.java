@@ -24,6 +24,11 @@ public abstract class ScreenMixin extends AbstractParentElement implements Drawa
     @Unique
     ConfigManager configManager;
 
+    /*
+    在这里使用 @Shadow 获取例如 client 之类的属性会导致游戏内渲染问题，因此在下面重新获取了 client 实例。
+    我也不知道为什么喵！
+    */
+
     @Inject(method = "renderPanoramaBackground", at = @At("HEAD"), cancellable = true)
     private void onRenderBackground(CallbackInfo ci,
                                     @Local(argsOnly = true) DrawContext context,
