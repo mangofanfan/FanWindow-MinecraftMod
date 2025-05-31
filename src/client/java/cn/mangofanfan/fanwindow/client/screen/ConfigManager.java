@@ -92,6 +92,14 @@ public class ConfigManager {
                         .setSaveConsumer(newValue -> config.setUseNewTitleScreen(newValue))
                         .build());
         generalCategory.addEntry(entryBuilder.startBooleanToggle(
+                                Text.translatable("fanwindow.config.useNewCreateWorldScreen"),
+                                config.isUseNewCreateWorldScreen()
+                        )
+                        .setDefaultValue(true)
+                        .setTooltip(Text.translatable("fanwindow.config.useNewCreateWorldScreen.description"))
+                        .setSaveConsumer(newValue -> config.setUseNewCreateWorldScreen(newValue))
+                        .build());
+        generalCategory.addEntry(entryBuilder.startBooleanToggle(
                                 Text.translatable("fanwindow.config.useNewBackgroundInNewScreen"),
                                 config.isUseNewBackgroundInNewScreen()
                         )

@@ -10,6 +10,7 @@ public class FanWindowConfig {
     private boolean useNewTitleScreen = true;
     private boolean useNewBackgroundGlobally = false;
     private boolean useNewBackgroundInNewScreen = true;
+    private boolean useNewCreateWorldScreen = true;
     private BgPicture bgPicture = BgPicture.Spring_to_Life_Artwork_png;
 
     public boolean isUseNewTitleScreen() {
@@ -42,5 +43,13 @@ public class FanWindowConfig {
 
     public void setUseNewBackgroundInNewScreen(boolean useNewBackgroundInNewScreen) {
         this.useNewBackgroundInNewScreen = useNewBackgroundInNewScreen;
+    }
+
+    public boolean isUseNewCreateWorldScreen() {
+        return useNewCreateWorldScreen;
+    }
+
+    public void setUseNewCreateWorldScreen(boolean useNewCreateWorldScreen) {
+        this.useNewCreateWorldScreen = useNewCreateWorldScreen;
     }
 }

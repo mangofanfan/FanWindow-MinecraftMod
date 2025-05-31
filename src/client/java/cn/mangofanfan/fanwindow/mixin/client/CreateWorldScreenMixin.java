@@ -1,5 +1,6 @@
 package cn.mangofanfan.fanwindow.mixin.client;
 
+import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
 import cn.mangofanfan.fanwindow.client.screen.NewCreateWorldScreenGameTab;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.world.CreateWorldScreen;
@@ -14,6 +15,7 @@ import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -33,12 +35,19 @@ public class CreateWorldScreenMixin extends Screen {
     @Shadow
     WorldCreator worldCreator;
 
+    @Unique
+    ConfigManager configManager = ConfigManager.getInstance();
+
     protected CreateWorldScreenMixin(Text title) {
         super(title);
     }
 
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     protected void onInit(CallbackInfo ci) {
+        // 检查配置
+        if (!configManager.config.isUseNewCreateWorldScreen()) {
+            return;
+        }
         // 获取 CreateWorldScreen 实例
         CreateWorldScreen self = (CreateWorldScreen)(Object)this;
         TabNavigationWidget.Builder builder = TabNavigationWidget.builder(this.tabManager, this.width);

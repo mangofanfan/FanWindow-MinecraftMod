@@ -16,4 +16,6 @@ PS：实际上目前并没有用到Fabric API的任何内容，因此似乎理�
 
 ![New Background](/res/New%20Background.png)
 
+![New Create World Screen](/res/New%20Create%20World%20Screen.png)
+
 ![FanWindow Config](/res/FanWindow%20Config.png)

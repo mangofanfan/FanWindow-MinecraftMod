@@ -16,5 +16,7 @@
   "fanwindow.config.useNewBackgroundGlobally": "Use new Background instead of vanilla screen background",
   "fanwindow.config.useNewBackgroundGlobally.description": "New background will replace all screen that use vanilla background globally.",
   "fanwindow.config.useNewBackgroundInNewScreen": "Use new Background in New Screen",
-  "fanwindow.config.useNewBackgroundInNewScreen.description": "Not available when 「Use new Background instead of vanilla screen background」 is enabled."
+  "fanwindow.config.useNewBackgroundInNewScreen.description": "Not available when 「Use new Background instead of vanilla screen background」 is enabled.",
+  "fanwindow.config.useNewCreateWorldScreen": "Use New Create World Screen",
+  "fanwindow.config.useNewCreateWorldScreen.description": "New Create World Screen improve the visual effect of the vanilla screen."
 }

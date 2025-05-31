@@ -16,5 +16,7 @@
   "fanwindow.config.useNewBackgroundGlobally": "使用新背景图片替换原版背景",
   "fanwindow.config.useNewBackgroundGlobally.description": "新背景图片会全局替换任何使用原版背景的屏幕。",
   "fanwindow.config.useNewBackgroundInNewScreen": "在新屏幕中使用新背景图片",
-  "fanwindow.config.useNewBackgroundInNewScreen.description": "若「使用新背景图片替换原版背景」启用，此配置无效。"
+  "fanwindow.config.useNewBackgroundInNewScreen.description": "若「使用新背景图片替换原版背景」启用，此配置无效。",
+  "fanwindow.config.useNewCreateWorldScreen": "使用新创建世界屏幕",
+  "fanwindow.config.useNewCreateWorldScreen.description": "新创建世界屏幕相比原版改善了视觉效果。"
 }
