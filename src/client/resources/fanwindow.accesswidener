@@ -1,0 +1,13 @@
+accessWidener v2 named
+
+# 访问加宽 - 类
+accessible class net/minecraft/client/gui/screen/world/CreateWorldScreen$GameTab
+accessible class net/minecraft/client/gui/screen/world/CreateWorldScreen$WorldTab
+accessible class net/minecraft/client/gui/screen/world/CreateWorldScreen$MoreTab
+
+# 访问加宽 - 构造方法
+accessible method net/minecraft/client/gui/screen/world/CreateWorldScreen$GameTab <init> (Lnet/minecraft/client/gui/screen/world/CreateWorldScreen;)V
+accessible method net/minecraft/client/gui/screen/world/CreateWorldScreen$WorldTab <init> (Lnet/minecraft/client/gui/screen/world/CreateWorldScreen;)V
+accessible method net/minecraft/client/gui/screen/world/CreateWorldScreen$MoreTab <init> (Lnet/minecraft/client/gui/screen/world/CreateWorldScreen;)V
+
+accessible method net/minecraft/client/gui/screen/world/CreateWorldScreen openExperimentsScreen (Lnet/minecraft/resource/DataConfiguration;)V

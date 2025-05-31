@@ -19,6 +19,8 @@ loom {
             sourceSet sourceSets.client
         }
     }
+
+    accessWidenerPath = file("src/client/resources/fanwindow.accesswidener")
 }
 
 fabricApi {

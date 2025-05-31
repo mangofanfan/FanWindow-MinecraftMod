@@ -41,6 +41,7 @@
       "environment": "client"
     }
   ],
+  "accessWidener": "fanwindow.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
