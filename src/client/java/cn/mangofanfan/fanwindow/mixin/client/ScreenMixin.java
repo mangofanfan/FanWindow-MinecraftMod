@@ -39,17 +39,17 @@ public abstract class ScreenMixin extends AbstractParentElement implements Drawa
         int height = client.getWindow().getScaledHeight();
         if (client.world == null) {
             Logger logger = LoggerFactory.getLogger("ScreenMixin");
-            logger.trace("ScreenMixin is ready to change global background.");
+            logger.debug("ScreenMixin is ready to change global background.");
             if (configManager.config.isUseNewBackgroundGlobally()) {
                 BgPicture bgPicture = configManager.config.getBgPicture();
                 int[] textureSize = bgPicture.getPicSize();
                 Identifier bgTexture = Identifier.of("fanwindow", bgPicture.getPath());
                 RenderBackground.renderBackground(context, textureSize, width, height, bgTexture);
-                logger.trace("ScreenMixin background has been rendered.");
+                logger.debug("ScreenMixin background has been rendered.");
                 ci.cancel();
             }
             else {
-                logger.trace("According to config, ScreenMixin return.");
+                logger.debug("According to config, ScreenMixin return.");
             }
         }
     }

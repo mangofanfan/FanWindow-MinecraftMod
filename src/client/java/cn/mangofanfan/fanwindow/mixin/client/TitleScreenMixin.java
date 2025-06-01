@@ -4,7 +4,6 @@ import cn.mangofanfan.fanwindow.client.GlobalState;
 import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
 import cn.mangofanfan.fanwindow.client.screen.NewTitleScreen;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;

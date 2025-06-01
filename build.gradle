@@ -6,6 +6,22 @@ plugins {
 version = project.mod_version
 group = project.maven_group
 
+ext {
+    if (minecraft_version == "1.21") {
+        yarn_mappings = v121_yarn_mappings
+        fabric_version = v121_fabric_version
+        cloth_config_api_version = v121_cloth_config_api_version
+        modmenu_version = v121_modmenu_version
+    }
+    else if (minecraft_version == "1.21.5") {
+        yarn_mappings = v1215_yarn_mappings
+        fabric_version = v1215_fabric_version
+        cloth_config_api_version = v1215_cloth_config_api_version
+        modmenu_version = v1215_modmenu_version
+    }
+}
+
+
 base {
     archivesName = project.archives_base_name
 }
@@ -21,11 +37,26 @@ loom {
     }
 
     accessWidenerPath = file("src/client/resources/fanwindow.accesswidener")
+
+    runs {
+        client {
+            property("fabric.gameVersion", minecraft_version)
+        }
+    }
 }
 
 fabricApi {
     configureDataGeneration {
         client = true
+    }
+}
+
+sourceSets {
+    client {
+        java {
+            // 动态引入版本适配代码
+            srcDir "src/versioned/${minecraft_version}/client/java"
+        }
     }
 }
 
@@ -100,6 +131,27 @@ jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
     }
+
+    archiveBaseName = "fanwindow"
+    archiveVersion = "${project.version}-mc${minecraft_version}"
+}
+
+sourcesJar {
+    archiveBaseName = "fanwindow"
+    archiveVersion = "${project.version}-mc${minecraft_version}"
+    archiveClassifier = "sources"
+    from sourceSets.main.allSource
+}
+
+remapJar {
+    archiveBaseName = jar.archiveBaseName
+    archiveVersion = jar.archiveVersion
+}
+
+remapSourcesJar {
+    archiveBaseName = sourcesJar.archiveBaseName
+    archiveVersion = sourcesJar.archiveVersion
+    archiveClassifier = sourcesJar.archiveClassifier
 }
 
 // configure the maven publication
