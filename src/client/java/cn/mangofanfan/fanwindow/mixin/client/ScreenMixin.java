@@ -29,7 +29,7 @@ public abstract class ScreenMixin extends AbstractParentElement implements Drawa
     我也不知道为什么喵！
     */
 
-    @Inject(method = "renderPanoramaBackground", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "renderBackground", at = @At("HEAD"), cancellable = true)
     private void onRenderBackground(CallbackInfo ci,
                                     @Local(argsOnly = true) DrawContext context,
                                     @Local(argsOnly = true) float deltaTicks) {

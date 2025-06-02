@@ -65,10 +65,10 @@ public class GameModeCardWidget extends ClickableWidget {
         int strongColor = isChosen() ? 0xFFFFFFFF : 0xFF000000;
         int strongBgColor = isChosen() ? 0xDD000000 : 0xDDFFFFFF;
         context.fill(getX() + 1, getY() + 1, getX() + width - 1, getY() + height - 1, bgColor);
+        context.drawTexture(RenderLayer::getGuiTextured, modePicture, getX() + 1, getY() + 1,  0, 0, width - 2, height - 2, width - 2, height - 2);
         context.fill(getX() + 1, getY() + 71, getX() + width - 1, getY() + height - 1, strongBgColor);
         context.drawWrappedText(screen.getTextRenderer(), strongText, getX() + 5, getY() + 76, width - 12, strongColor, false);
         context.drawBorder(getX(), getY(), width, height, borderColor);
-        context.drawTexture(RenderLayer::getCelestial, modePicture, getX() + 1, getY() + 1,  0, 0, width - 2, height - 2, width - 2, height - 2);
     }
 
     @Override

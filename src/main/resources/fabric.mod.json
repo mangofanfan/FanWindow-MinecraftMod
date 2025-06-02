@@ -21,9 +21,6 @@
   "icon": "assets/fanwindow/icon.png",
   "environment": "client",
   "entrypoints": {
-    "fabric-datagen": [
-      "cn.mangofanfan.fanwindow.client.FanwindowDataGenerator"
-    ],
     "client": [
       "cn.mangofanfan.fanwindow.client.FanwindowClient"
     ],
@@ -44,8 +41,7 @@
   "accessWidener": "fanwindow.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
-    "minecraft": "${minecraft_version}",
+    "minecraft": "${publish_minecraft_version}",
     "cloth-config": "${cloth_config_api_version}"
   },
   "suggests": {

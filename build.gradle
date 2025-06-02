@@ -9,15 +9,51 @@ group = project.maven_group
 ext {
     if (minecraft_version == "1.21") {
         yarn_mappings = v121_yarn_mappings
-        fabric_version = v121_fabric_version
         cloth_config_api_version = v121_cloth_config_api_version
         modmenu_version = v121_modmenu_version
+        versioned_scr = v121_versioned_scr
+        publish_minecraft_version = ">=1.21 <1.21.2"
+        mod_sign = "mc1.21+mc1.21.1"
+    }
+    else if (minecraft_version == "1.21.1") {
+        yarn_mappings = v1211_yarn_mappings
+        cloth_config_api_version = v1211_cloth_config_api_version
+        modmenu_version = v1211_modmenu_version
+        versioned_scr = v1211_versioned_scr
+        publish_minecraft_version = ">=1.21 <1.21.2"
+        mod_sign = "mc1.21+mc1.21.1"
+    }
+    else if (minecraft_version == "1.21.2") {
+        yarn_mappings = v1212_yarn_mappings
+        cloth_config_api_version = v1212_cloth_config_api_version
+        modmenu_version = v1212_modmenu_version
+        versioned_scr = v1212_versioned_scr
+        publish_minecraft_version = ">=1.21.2 <1.21.4"
+        mod_sign = "mc1.21.2+mc1.21.3"
+    }
+    else if (minecraft_version == "1.21.3") {
+        yarn_mappings = v1213_yarn_mappings
+        cloth_config_api_version = v1213_cloth_config_api_version
+        modmenu_version = v1213_modmenu_version
+        versioned_scr = v1213_versioned_scr
+        publish_minecraft_version = ">=1.21.2 <1.21.4"
+        mod_sign = "mc1.21.2+mc1.21.3"
+    }
+    else if (minecraft_version == "1.21.4") {
+        yarn_mappings = v1214_yarn_mappings
+        cloth_config_api_version = v1214_cloth_config_api_version
+        modmenu_version = v1214_modmenu_version
+        versioned_scr = v1214_versioned_scr
+        publish_minecraft_version = "1.21.4"
+        mod_sign = "mc1.21.4"
     }
     else if (minecraft_version == "1.21.5") {
         yarn_mappings = v1215_yarn_mappings
-        fabric_version = v1215_fabric_version
         cloth_config_api_version = v1215_cloth_config_api_version
         modmenu_version = v1215_modmenu_version
+        versioned_scr = v1215_versioned_scr
+        publish_minecraft_version = "1.21.5"
+        mod_sign = "mc1.21.5"
     }
 }
 
@@ -55,7 +91,7 @@ sourceSets {
     client {
         java {
             // 动态引入版本适配代码
-            srcDir "src/versioned/${minecraft_version}/client/java"
+            srcDir "src/versioned/${versioned_scr}/client/java"
         }
     }
 }
@@ -81,7 +117,6 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     modApi "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_api_version}"
@@ -89,15 +124,15 @@ dependencies {
 
 processResources {
     inputs.property "version", owner.version
-    inputs.property "minecraft_version", owner.minecraft_version
     inputs.property "loader_version", owner.loader_version
     inputs.property "cloth_config_api_version", owner.cloth_config_api_version
     inputs.property "modmenu_version", owner.modmenu_version
+    inputs.property "publish_minecraft_version", owner.publish_minecraft_version
     filteringCharset = "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": version,
-                "minecraft_version": minecraft_version,
+                "publish_minecraft_version": publish_minecraft_version,
                 "loader_version": loader_version,
                 "cloth_config_api_version": cloth_config_api_version,
                 "modmenu_version": modmenu_version
@@ -133,12 +168,12 @@ jar {
     }
 
     archiveBaseName = "fanwindow"
-    archiveVersion = "${project.version}-mc${minecraft_version}"
+    archiveVersion = "${project.version}-${mod_sign}"
 }
 
 sourcesJar {
     archiveBaseName = "fanwindow"
-    archiveVersion = "${project.version}-mc${minecraft_version}"
+    archiveVersion = "${project.version}-${mod_sign}"
     archiveClassifier = "sources"
     from sourceSets.main.allSource
 }
