@@ -11,24 +11,41 @@ public enum BgPicture {
     /**
      * 勇气之袋的官方艺术作品 1.21.2
      */
-    Bundles_of_Bravery_Artwork_png,
+    Bundles_of_Bravery_Artwork_png("Bundles_of_Bravery_Artwork.png"),
     /**
      * 春意盎然的官方艺术作品 1.21.5
      */
-    Spring_to_Life_Artwork_png,
+    Spring_to_Life_Artwork_png("Spring_to_Life_Artwork.png"),
     /**
      * 苍园觉醒的官方艺术作品 1.21.4
      */
-    The_Garden_Awakens_Artwork_png,
+    The_Garden_Awakens_Artwork_png("The_Garden_Awakens_Artwork.png"),
     /**
      * 棘巧试炼的官方艺术作品 1.21
      */
-    Tricky_Trials_Artwork_png;
+    Tricky_Trials_Artwork_png("Tricky_Trials_Artwork.png"),
+
+    /**
+     * 末影龙
+     */
+    Ender_Dragon_png("Ender_Dragon.png"),
+
+    /**
+     * 自定义
+     */
+    Custom_png("Custom.png"),;
+
+    private final String picName;
+    BgPicture(String image) {
+        this.picName = image;
+    }
 
     /**
      * 获取文件名组成的ArrayList，文件名通过getPicName获取，格式后缀为.png
+     * 由于已经替换实现方式，已弃用。
      * @return ArrayList<String>，由全部图片名称组成。
      */
+    @Deprecated
     public static Iterable<String> getValues() {
         ArrayList<String> values = new ArrayList<>();
         for (BgPicture bgPicture : BgPicture.values()) {
@@ -42,7 +59,7 @@ public enum BgPicture {
      * @return String，文件名
      */
     public String getPicName() {
-        return this.toString().replace("_png", ".png");
+        return this.picName;
     }
 
     /**
@@ -75,6 +92,11 @@ public enum BgPicture {
             case Tricky_Trials_Artwork_png:
                 size[0] = 2560;
                 size[1] = 1440;
+                break;
+
+            case Ender_Dragon_png, Custom_png:
+                size[0] = 1600;
+                size[1] = 900;
                 break;
         }
         return size;

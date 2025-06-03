@@ -3,60 +3,26 @@ plugins {
     id 'maven-publish'
 }
 
+apply from: "versions.gradle"
+
 version = project.mod_version
 group = project.maven_group
 
-ext {
-    if (minecraft_version == "1.21") {
-        yarn_mappings = v121_yarn_mappings
-        cloth_config_api_version = v121_cloth_config_api_version
-        modmenu_version = v121_modmenu_version
-        versioned_scr = v121_versioned_scr
-        publish_minecraft_version = ">=1.21 <1.21.2"
-        mod_sign = "mc1.21+mc1.21.1"
+// 动态配置版本相关属性
+if (project.hasProperty('target_version')) {
+    ext.config = versionConfigs[target_version]
+    if (config == null) {
+        throw new GradleException("Unsupported Minecraft version: ${target_version}") as Throwable
     }
-    else if (minecraft_version == "1.21.1") {
-        yarn_mappings = v1211_yarn_mappings
-        cloth_config_api_version = v1211_cloth_config_api_version
-        modmenu_version = v1211_modmenu_version
-        versioned_scr = v1211_versioned_scr
-        publish_minecraft_version = ">=1.21 <1.21.2"
-        mod_sign = "mc1.21+mc1.21.1"
-    }
-    else if (minecraft_version == "1.21.2") {
-        yarn_mappings = v1212_yarn_mappings
-        cloth_config_api_version = v1212_cloth_config_api_version
-        modmenu_version = v1212_modmenu_version
-        versioned_scr = v1212_versioned_scr
-        publish_minecraft_version = ">=1.21.2 <1.21.4"
-        mod_sign = "mc1.21.2+mc1.21.3"
-    }
-    else if (minecraft_version == "1.21.3") {
-        yarn_mappings = v1213_yarn_mappings
-        cloth_config_api_version = v1213_cloth_config_api_version
-        modmenu_version = v1213_modmenu_version
-        versioned_scr = v1213_versioned_scr
-        publish_minecraft_version = ">=1.21.2 <1.21.4"
-        mod_sign = "mc1.21.2+mc1.21.3"
-    }
-    else if (minecraft_version == "1.21.4") {
-        yarn_mappings = v1214_yarn_mappings
-        cloth_config_api_version = v1214_cloth_config_api_version
-        modmenu_version = v1214_modmenu_version
-        versioned_scr = v1214_versioned_scr
-        publish_minecraft_version = "1.21.4"
-        mod_sign = "mc1.21.4"
-    }
-    else if (minecraft_version == "1.21.5") {
-        yarn_mappings = v1215_yarn_mappings
-        cloth_config_api_version = v1215_cloth_config_api_version
-        modmenu_version = v1215_modmenu_version
-        versioned_scr = v1215_versioned_scr
-        publish_minecraft_version = "1.21.5"
-        mod_sign = "mc1.21.5"
-    }
-}
 
+    // 设置各属性
+    project.ext.yarn_mappings = config.yarn_mappings
+    project.ext.cloth_config_api_version = config.cloth_config_api_version
+    project.ext.modmenu_version = config.modmenu_version
+    project.ext.versioned_scr = config.versioned_scr
+    project.ext.publish_minecraft_version = config.publish_minecraft_version
+    project.ext.mod_sign = config.mod_sign
+}
 
 base {
     archivesName = project.archives_base_name
@@ -76,7 +42,7 @@ loom {
 
     runs {
         client {
-            property("fabric.gameVersion", minecraft_version)
+            property("fabric.gameVersion", target_version)
         }
     }
 }
@@ -113,7 +79,7 @@ repositories {
 
 dependencies {
     // To change the versions see the gradle.properties file
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    minecraft "com.mojang:minecraft:${project.target_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
@@ -168,12 +134,12 @@ jar {
     }
 
     archiveBaseName = "fanwindow"
-    archiveVersion = "${project.version}-${mod_sign}"
+    archiveVersion = "${project.version}-${project.mod_sign}"
 }
 
 sourcesJar {
     archiveBaseName = "fanwindow"
-    archiveVersion = "${project.version}-${mod_sign}"
+    archiveVersion = "${project.version}-${project.mod_sign}"
     archiveClassifier = "sources"
     from sourceSets.main.allSource
 }
@@ -204,5 +170,26 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+    }
+}
+
+// ========== 添加多版本构建任务 ==========
+task buildAllVersions {
+    group 'build'
+    description 'Builds the mod for all supported Minecraft versions'
+
+    doLast {
+        def versions = ["1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4", "1.21.5"]
+        def total = versions.size()
+        def current = 1
+
+        versions.each { version ->
+            logger.lifecycle("\n>>> [${current}/${total}] Building for Minecraft ${version}")
+            exec {
+                workingDir projectDir
+                commandLine = ["gradle.bat", "build", "-Ptarget_version=${version}", "--stacktrace"]
+            }
+            current++
+        }
     }
 }

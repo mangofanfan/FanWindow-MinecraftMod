@@ -12,7 +12,8 @@ public class RenderBackground {
         double var2 = (double) width / height;
         if (var1 == var2) {
             regionSize = textureSize;
-        } else if (var1 < var2) {
+        }
+        else if (var1 < var2) {
             regionSize[0] = textureSize[0];
             regionSize[1] = (int) (textureSize[1] / var2 * var1);
         }
@@ -21,6 +22,5 @@ public class RenderBackground {
             regionSize[1] = textureSize[1];
         }
         context.drawTexture(RenderLayer::getGuiOpaqueTexturedBackground, bgTexture, 0, 0, (float) (textureSize[0] - regionSize[0]) / 2, (float) (textureSize[1] - regionSize[1]) / 2, width, height, regionSize[0], regionSize[1], textureSize[0], textureSize[1]);
-
     }
 }

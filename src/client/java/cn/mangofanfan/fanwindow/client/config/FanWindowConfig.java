@@ -25,8 +25,8 @@ public class FanWindowConfig {
         return bgPicture;
     }
 
-    public void setBgPicture(String bgPictureName) {
-        this.bgPicture = BgPicture.valueOf(bgPictureName.replace(".png", "_png"));
+    public void setBgPicture(BgPicture bgPicture) {
+        this.bgPicture = bgPicture;
     }
 
     public boolean isUseNewBackgroundGlobally() {

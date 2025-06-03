@@ -6,10 +6,9 @@ import com.google.gson.Gson;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +18,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 
 /**
@@ -115,28 +115,36 @@ public class ConfigManager {
                         .setTooltip(Text.translatable("fanwindow.config.useNewBackgroundGlobally.description"))
                         .setSaveConsumer(newValue -> config.setUseNewBackgroundGlobally(newValue))
                         .build());
-        generalCategory.addEntry(entryBuilder.startStringDropdownMenu(Text.translatable("fanwindow.config.background"),
-                                config.getBgPicture().getPicName())
-                        .setDefaultValue(config.getBgPicture().getPicName())
-                        .setSelections(BgPicture.getValues())
+        generalCategory.addEntry(entryBuilder.startDropdownMenu(
+                                Text.translatable("fanwindow.config.background"),
+                                DropdownMenuBuilder.TopCellElementBuilder.of(
+                                        config.getBgPicture(),
+                                        this::stringToBgPicture,
+                                        this::bgPictureToText
+                                )
+                        )
+                        .setDefaultValue(BgPicture.Tricky_Trials_Artwork_png)
                         .setTooltip(Text.translatable("fanwindow.config.background.description"))
+                        .setSelections(List.of(BgPicture.values()))
                         .setSaveConsumer(this::saveBgPicture)
                         .build());
         generalCategory.addEntry(entryBuilder.startTextDescription(Text.translatable("fanwindow.config.description")).build());
     }
 
-    private void saveBgPicture(String value) {
-        try {
-            config.setBgPicture(value);
-        } catch (IllegalArgumentException e) {
-            MinecraftClient client = MinecraftClient.getInstance();
-            client.getToastManager().add(
-                    SystemToast.create(client,
-                            SystemToast.Type.UNSECURE_SERVER_WARNING,
-                            Text.translatable("fanwindow.config.background.errorToast.title"),
-                            Text.translatable("fanwindow.config.background.errorToast.description"))
-            );
-            logger.error("IllegalArgumentException occurred when saving bg picture!", e);
+    private void saveBgPicture(BgPicture bgPicture) {
+        config.setBgPicture(bgPicture);
+    }
+
+    private BgPicture stringToBgPicture(String value) {
+        for (BgPicture bgPicture : BgPicture.values()) {
+            if (bgPicture.name().equalsIgnoreCase(value)) {
+                return bgPicture;
+            }
         }
+        return null;
+    }
+
+    private Text bgPictureToText(BgPicture bgPicture) {
+        return Text.of(bgPicture.name());
     }
 }
