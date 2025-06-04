@@ -10,11 +10,15 @@
   "fanwindow.config.general": "General Config",
   "fanwindow.config.description": "FanWindow is a mod only for redesigning your client screen. Contact with me for any problem.\nYou might need to restart Minecraft to make your changes in use.",
   "fanwindow.config.background": "Choose background picture",
-  "fanwindow.config.background.description": "Pictures here will be shown as the New Background.\nAt the end of the filename, use '_png' to replace with '.png'.",
+  "fanwindow.config.background.description": "If in Disabled Mode, Pictures here will be shown as the New Background. Otherwise this option will be ignored.\nAt the end of the filename, use '_png' to replace with '.png'.",
   "fanwindow.config.useNewBackgroundGlobally": "Use new Background instead of vanilla screen background",
   "fanwindow.config.useNewBackgroundGlobally.description": "New background will replace all screen that use vanilla background globally.",
   "fanwindow.config.useNewBackgroundInNewScreen": "Use new Background in New Screen",
   "fanwindow.config.useNewBackgroundInNewScreen.description": "Not available when 「Use new Background instead of vanilla screen background」 is enabled.",
   "fanwindow.config.useNewCreateWorldScreen": "Use New Create World Screen",
-  "fanwindow.config.useNewCreateWorldScreen.description": "New Create World Screen improve the visual effect of the vanilla screen."
+  "fanwindow.config.useNewCreateWorldScreen.description": "New Create World Screen improve the visual effect of the vanilla screen.",
+  "fanwindow.config.customBackground": "Background Config",
+  "fanwindow.config.customBackgroundImageMode": "Custom Background Picture Mode",
+  "fanwindow.config.customBackgroundImageMode.description": "Disabled: using Picture chosen below, provided by Fan Window mod.\nResourcePack: using Picture provided in resourcepack.\nConfigDir: using Picture in Config Dir.\nSee document below for guidance to change your custom background.",
+  "fanwindow.config.customBackground.description": "In Disabled mode, you can use one picture chosen below as background. In ResourcePack mode and ConfigDir mode you can change the background image through your heart.\nFor most player, you can toggle mode to ConfigDir, and move your beloved image (png) into 「.minecraft/config/fanwindow」 dir, rename it to 「custom.png」, and save your changes. Soon you can enjoy a new background image.\nFor support of ResourcePack mode, please see the GitHub of Fan Window mod.\nBTW, if anything in Config Screen goes wrong, you might need to restart Minecraft to make it great again =w"
 }

@@ -28,12 +28,9 @@ public enum BgPicture {
     /**
      * 末影龙
      */
-    Ender_Dragon_png("Ender_Dragon.png"),
+    Ender_Dragon_png("Ender_Dragon.png");
 
-    /**
-     * 自定义
-     */
-    Custom_png("Custom.png"),;
+    // TODO 重构自定义模式
 
     private final String picName;
     BgPicture(String image) {
@@ -93,8 +90,7 @@ public enum BgPicture {
                 size[0] = 2560;
                 size[1] = 1440;
                 break;
-
-            case Ender_Dragon_png, Custom_png:
+            case Ender_Dragon_png:
                 size[0] = 1600;
                 size[1] = 900;
                 break;

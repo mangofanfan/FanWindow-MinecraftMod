@@ -1,7 +1,6 @@
 package cn.mangofanfan.fanwindow.client.screen;
 
 import cn.mangofanfan.fanwindow.client.GlobalState;
-import cn.mangofanfan.fanwindow.client.config.BgPicture;
 import cn.mangofanfan.fanwindow.client.function.RenderBackground;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -67,9 +66,8 @@ public class NewTitleScreen extends Screen {
         globalState = GlobalState.getInstance();
         logoDrawer = new LogoDrawer(false);
         configManager = ConfigManager.getInstance();
-        BgPicture bgPicture = configManager.config.getBgPicture();
-        bgTexture = Identifier.of("fanwindow", bgPicture.getPath());
-        textureSize = bgPicture.getPicSize();
+        bgTexture = configManager.getBackgroundTexture();
+        textureSize = configManager.getBackgroundTextureSize();
     }
 
     @Override

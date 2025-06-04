@@ -10,11 +10,15 @@
   "fanwindow.config.general": "总体设置",
   "fanwindow.config.description": "芒果窗是一个只负责修改客户端屏幕的模组。如有任何问题，请与我联系。\n您可能需要重新启动 Minecraft 来确保更改生效。",
   "fanwindow.config.background": "选择背景图片",
-  "fanwindow.config.background.description": "这里的图片将会作为新背景图片。\n在文件名的末尾需要用‘_png’代替‘.png’。",
+  "fanwindow.config.background.description": "在 Disabled 模式下，这里的图片将会作为新背景图片；否则此设置会被忽略。\n在文件名的末尾需要用‘_png’代替‘.png’。",
   "fanwindow.config.useNewBackgroundGlobally": "使用新背景图片替换原版背景",
   "fanwindow.config.useNewBackgroundGlobally.description": "新背景图片会全局替换任何使用原版背景的屏幕。",
   "fanwindow.config.useNewBackgroundInNewScreen": "在新屏幕中使用新背景图片",
   "fanwindow.config.useNewBackgroundInNewScreen.description": "若「使用新背景图片替换原版背景」启用，此配置无效。",
   "fanwindow.config.useNewCreateWorldScreen": "使用新创建世界屏幕",
-  "fanwindow.config.useNewCreateWorldScreen.description": "新创建世界屏幕相比原版改善了视觉效果。"
+  "fanwindow.config.useNewCreateWorldScreen.description": "新创建世界屏幕相比原版改善了视觉效果。",
+  "fanwindow.config.customBackground": "背景设置",
+  "fanwindow.config.customBackgroundImageMode": "自定义背景模式",
+  "fanwindow.config.customBackgroundImageMode.description": "Disabled: 使用下方选择的、由芒果窗模组提供的背景。\nResourcePack: 使用由资源包提供的背景。\nConfigDir: 使用配置目录中的背景。\n查看下方的文档以获取自定义你的背景的指南。",
+  "fanwindow.config.customBackground.description": "在 Disabled 模式下，你可以从下方选择一张图片作为背景。在 ResourcePack 和 ConfigDir 模式下，你可以任意更改背景图片。\n普遍来说，你可以将模式更改为 ConfigDir，然后将你心爱的图片放入「.minecraft/config/fanwindow」目录，并重命名为「custom.png」，保存更改，然后即可得到新的背景。\n对于 ResourcePack 模式，请参阅本模组的 GitHub 获取更多帮助。\n顺便，如果在配置屏幕中出现奇怪的问题，你可能需要重新启动 Minecraft 来再试试 =w"
 }

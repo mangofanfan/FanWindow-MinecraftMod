@@ -1,7 +1,9 @@
 package cn.mangofanfan.fanwindow.client.screen;
 
 import cn.mangofanfan.fanwindow.client.config.BgPicture;
+import cn.mangofanfan.fanwindow.client.config.CustomPictureMode;
 import cn.mangofanfan.fanwindow.client.config.FanWindowConfig;
+import cn.mangofanfan.fanwindow.client.function.LocalBackgroundTextureIdentifier;
 import com.google.gson.Gson;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -10,6 +12,7 @@ import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,10 +29,12 @@ import java.util.List;
  * 使用单例模式确保安全使用。
  */
 public class ConfigManager {
-    private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("fanwindow.json");
+    private static final Path CUSTOM_IMAGE = FabricLoader.getInstance().getConfigDir().resolve("fanwindow/custom.png");
+    private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("fanwindow/fanwindow.json");
     private static ConfigManager instance;
     private final ConfigBuilder configBuilder;
-    private final ConfigCategory generalCategory;
+    private final ConfigCategory generalCategory, customBackgroundCategory;
+    private LocalBackgroundTextureIdentifier localBackgroundTextureIdentifier;
 
     /**
      * 通过ConfigManager中的config属性访问FanWindowConfig。
@@ -41,6 +46,8 @@ public class ConfigManager {
     private ConfigManager() {
         configBuilder = ConfigBuilder.create().setTitle(Text.translatable("fanwindow.config.title"));
         generalCategory = configBuilder.getOrCreateCategory(Text.translatable("fanwindow.config.general"));
+        customBackgroundCategory = configBuilder.getOrCreateCategory(Text.translatable("fanwindow.config.customBackground"));
+        localBackgroundTextureIdentifier = new LocalBackgroundTextureIdentifier(CUSTOM_IMAGE);
         if (config == null) {
             loadConfig();
         }
@@ -52,9 +59,15 @@ public class ConfigManager {
     }
 
     public void loadConfig() {
+        // 若配置文件目录fanwindow已存在则不创建，否则创建
+        try {
+            Files.createDirectory(FabricLoader.getInstance().getConfigDir().resolve("fanwindow"));
+        } catch (IOException ignored) {}
+
+        // 初始化配置文件
         try (Reader reader = Files.newBufferedReader(CONFIG_PATH)) {
             config = new Gson().fromJson(reader, FanWindowConfig.class);
-        } catch (IOException e) {
+        } catch (IOException | NoSuchFieldError e) {
             config = new FanWindowConfig(); // 创建默认配置
             saveConfig();
         }
@@ -83,6 +96,7 @@ public class ConfigManager {
 
     private void initConfigOptions() {
         ConfigEntryBuilder entryBuilder = ConfigEntryBuilder.create();
+        generalCategory.addEntry(entryBuilder.startTextDescription(Text.translatable("fanwindow.config.description")).build());
         generalCategory.addEntry(entryBuilder.startBooleanToggle(
                                 Text.translatable("fanwindow.config.useNewTitleScreen"),
                                 config.isUseNewTitleScreen()
@@ -115,24 +129,42 @@ public class ConfigManager {
                         .setTooltip(Text.translatable("fanwindow.config.useNewBackgroundGlobally.description"))
                         .setSaveConsumer(newValue -> config.setUseNewBackgroundGlobally(newValue))
                         .build());
-        generalCategory.addEntry(entryBuilder.startDropdownMenu(
-                                Text.translatable("fanwindow.config.background"),
+        customBackgroundCategory.addEntry(entryBuilder.startDropdownMenu(
+                                Text.translatable("fanwindow.config.customBackgroundImageMode"),
                                 DropdownMenuBuilder.TopCellElementBuilder.of(
-                                        config.getBgPicture(),
-                                        this::stringToBgPicture,
-                                        this::bgPictureToText
+                                        config.getCustomPictureMod(),
+                                        this::stringToCustomPictureMode,
+                                        this::customPictureModeToString
                                 )
                         )
-                        .setDefaultValue(BgPicture.Tricky_Trials_Artwork_png)
-                        .setTooltip(Text.translatable("fanwindow.config.background.description"))
-                        .setSelections(List.of(BgPicture.values()))
-                        .setSaveConsumer(this::saveBgPicture)
+                        .setDefaultValue(CustomPictureMode.Disabled)
+                        .setTooltip(Text.translatable("fanwindow.config.customBackgroundImageMode.description"))
+                        .setSelections(List.of(CustomPictureMode.values()))
+                        .setSaveConsumer(this::saveCustomPictureMode)
                         .build());
-        generalCategory.addEntry(entryBuilder.startTextDescription(Text.translatable("fanwindow.config.description")).build());
+        customBackgroundCategory.addEntry(entryBuilder.startTextDescription(Text.translatable("fanwindow.config.customBackground.description")).build());
+        customBackgroundCategory.addEntry(entryBuilder.startDropdownMenu(
+                        Text.translatable("fanwindow.config.background"),
+                        DropdownMenuBuilder.TopCellElementBuilder.of(
+                                config.getBgPicture(),
+                                this::stringToBgPicture,
+                                this::bgPictureToText
+                        )
+                )
+                .setDefaultValue(BgPicture.Tricky_Trials_Artwork_png)
+                .setTooltip(Text.translatable("fanwindow.config.background.description"))
+                .setSelections(List.of(BgPicture.values()))
+                .setSaveConsumer(this::saveBgPicture)
+                .build());
     }
 
     private void saveBgPicture(BgPicture bgPicture) {
         config.setBgPicture(bgPicture);
+    }
+
+    private void saveCustomPictureMode(CustomPictureMode customPictureMode) {
+        config.setCustomPictureMod(customPictureMode);
+        localBackgroundTextureIdentifier = new LocalBackgroundTextureIdentifier(CUSTOM_IMAGE);
     }
 
     private BgPicture stringToBgPicture(String value) {
@@ -146,5 +178,38 @@ public class ConfigManager {
 
     private Text bgPictureToText(BgPicture bgPicture) {
         return Text.of(bgPicture.name());
+    }
+
+    private CustomPictureMode stringToCustomPictureMode(String value) {
+        for (CustomPictureMode customPictureMod : CustomPictureMode.values()) {
+            if (customPictureMod.name().equalsIgnoreCase(value)) {
+                return customPictureMod;
+            }
+        }
+        return null;
+    }
+
+    private Text customPictureModeToString(CustomPictureMode customPictureMode) {
+        return Text.of(customPictureMode.name());
+    }
+
+    public Identifier getBackgroundTexture() {
+        Identifier identifier = null;
+        switch (config.getCustomPictureMod()) {
+            case Disabled -> identifier = Identifier.of("fanwindow", config.getBgPicture().getPath());
+            case ResourcePack -> identifier = Identifier.of("fanwindow", "textures/artwork/custom.png");
+            case ConfigDir -> identifier = localBackgroundTextureIdentifier.getIdentifier();
+        }
+        return identifier;
+    }
+
+    public int[] getBackgroundTextureSize() {
+        int[] textureSize = {0, 0};
+        switch (config.getCustomPictureMod()) {
+            case Disabled ->  textureSize = config.getBgPicture().getPicSize();
+            case ResourcePack -> textureSize = new int[]{1600, 900};
+            case ConfigDir ->  textureSize = localBackgroundTextureIdentifier.getTextureSize();
+        }
+        return  textureSize;
     }
 }
