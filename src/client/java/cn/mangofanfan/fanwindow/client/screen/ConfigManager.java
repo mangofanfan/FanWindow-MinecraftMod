@@ -33,7 +33,8 @@ public class ConfigManager {
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("fanwindow/fanwindow.json");
     private static ConfigManager instance;
     private final ConfigBuilder configBuilder;
-    private final ConfigCategory generalCategory, customBackgroundCategory;
+    private ConfigCategory generalCategory;
+    private ConfigCategory customBackgroundCategory;
     private LocalBackgroundTextureIdentifier localBackgroundTextureIdentifier;
 
     /**
@@ -45,16 +46,11 @@ public class ConfigManager {
 
     private ConfigManager() {
         configBuilder = ConfigBuilder.create().setTitle(Text.translatable("fanwindow.config.title"));
-        generalCategory = configBuilder.getOrCreateCategory(Text.translatable("fanwindow.config.general"));
-        customBackgroundCategory = configBuilder.getOrCreateCategory(Text.translatable("fanwindow.config.customBackground"));
         localBackgroundTextureIdentifier = new LocalBackgroundTextureIdentifier(CUSTOM_IMAGE);
-        if (config == null) {
-            loadConfig();
-        }
-        initConfigOptions();
+        loadConfig();
         configBuilder.setSavingRunnable(() -> {
             saveConfig();
-            logger.info("Saving config of FanWindow.");
+            logger.info("Saving config of Fan Window.");
         });
     }
 
@@ -90,12 +86,26 @@ public class ConfigManager {
 
     public Screen getScreen(Screen parent) {
         logger.debug("Getting ConfigScreen instance.");
+        initConfigOptions();
         configBuilder.setParentScreen(parent);
         return configBuilder.build();
     }
 
+    /**
+     * 每次获取设置屏幕之前，都需要调用此方法来重新加载所有配置项
+     * 否则，配置屏幕会出现保存逻辑异常等问题
+     */
     private void initConfigOptions() {
+        // 如果已经加载过配置项目（已经获取过一次配置屏幕）则清空已有配置项
+        if (generalCategory != null && customBackgroundCategory != null) {
+            generalCategory.removeCategory();
+            customBackgroundCategory.removeCategory();
+        }
+
+        // 加载配置项目
         ConfigEntryBuilder entryBuilder = ConfigEntryBuilder.create();
+        generalCategory = configBuilder.getOrCreateCategory(Text.translatable("fanwindow.config.general"));
+        customBackgroundCategory = configBuilder.getOrCreateCategory(Text.translatable("fanwindow.config.customBackground"));
         generalCategory.addEntry(entryBuilder.startTextDescription(Text.translatable("fanwindow.config.description")).build());
         generalCategory.addEntry(entryBuilder.startBooleanToggle(
                                 Text.translatable("fanwindow.config.useNewTitleScreen"),
