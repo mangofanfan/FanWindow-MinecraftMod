@@ -39,7 +39,7 @@ public abstract class ScreenMixin extends AbstractParentElement implements Drawa
             Logger logger = LoggerFactory.getLogger("ScreenMixin");
             logger.debug("ScreenMixin is ready to change global background.");
             if (configManager.config.isUseNewBackgroundGlobally()) {
-                RenderBackground.renderBackground(context, configManager.getBackgroundTextureSize(), width, height, configManager.getBackgroundTexture());
+                RenderBackground.renderBackground(context, width, height);
                 logger.debug("ScreenMixin background has been rendered.");
                 ci.cancel();
             }

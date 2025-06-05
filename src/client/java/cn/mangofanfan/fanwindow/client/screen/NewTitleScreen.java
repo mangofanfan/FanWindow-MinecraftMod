@@ -19,7 +19,6 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextIconButtonWidget;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +30,6 @@ public class NewTitleScreen extends Screen {
     private int cenX;
     private int cenY;
 
-    Identifier bgTexture;
-    int[] textureSize;
     private final LogoDrawer logoDrawer;
     ConfigManager configManager;
 
@@ -66,8 +63,6 @@ public class NewTitleScreen extends Screen {
         globalState = GlobalState.getInstance();
         logoDrawer = new LogoDrawer(false);
         configManager = ConfigManager.getInstance();
-        bgTexture = configManager.getBackgroundTexture();
-        textureSize = configManager.getBackgroundTextureSize();
     }
 
     @Override
@@ -196,7 +191,7 @@ public class NewTitleScreen extends Screen {
             super.renderBackground(context, mouseX, mouseY, deltaTicks);
         }
         else {
-            RenderBackground.renderBackground(context, textureSize, width, height, bgTexture);
+            RenderBackground.renderBackground(context, width, height);
         }
     }
 

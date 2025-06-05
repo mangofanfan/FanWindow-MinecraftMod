@@ -22,7 +22,7 @@ public class LocalBackgroundTextureIdentifier {
             identifier = Identifier.of("fanwindow", path);
             textureSize = new int[]{nativeImage.getWidth(), nativeImage.getHeight()};
 
-            NativeImageBackedTexture texture = new NativeImageBackedTexture(() -> path, nativeImage);
+            NativeImageBackedTexture texture = new NativeResourceLoaderImpl().getNativeImageBackedTexture(path, nativeImage);
             MinecraftClient.getInstance().getTextureManager().registerTexture(identifier, texture);
             logger.info("Successfully loaded Background Texture in Config Dir at {}", filePath);
         }

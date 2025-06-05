@@ -1,5 +1,6 @@
 package cn.mangofanfan.fanwindow.client.function;
 
+import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
@@ -21,5 +22,16 @@ public class RenderBackground {
             regionSize[1] = textureSize[1];
         }
         context.drawTexture(RenderLayer::getGuiOpaqueTexturedBackground, bgTexture, 0, 0, (float) (textureSize[0] - regionSize[0]) / 2, (float) (textureSize[1] - regionSize[1]) / 2, width, height, regionSize[0], regionSize[1], textureSize[0], textureSize[1]);
+    }
+
+    /**
+     * 简化的公开方法，从 ConfigManager 获取背景图片和尺寸
+     * @param context DrawContext
+     * @param width 游戏屏幕宽度
+     * @param height 游戏屏幕高度
+     */
+    public static void renderBackground(DrawContext context, int width, int height) {
+        ConfigManager configManager = ConfigManager.getInstance();
+        renderBackground(context, configManager.getBackgroundTextureSize(), width, height, configManager.getBackgroundTexture());
     }
 }

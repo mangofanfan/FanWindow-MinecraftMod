@@ -25,9 +25,8 @@ public class ClothConfigScreenMixin extends Screen {
                     target = "Lme/shedaniel/clothconfig2/gui/ClothConfigScreen;renderPanoramaBackground(Lnet/minecraft/client/gui/DrawContext;F)V")
     )
     public void onRenderBackground(ClothConfigScreen instance, DrawContext context, float v, @Local(argsOnly = true) float deltaTick) {
-        ConfigManager configManager = ConfigManager.getInstance();
-        if (configManager.config.isUseNewBackgroundGlobally()) {
-            RenderBackground.renderBackground(context, configManager.getBackgroundTextureSize(), instance.width, instance.height, configManager.getBackgroundTexture());
+        if (ConfigManager.getInstance().config.isUseNewBackgroundGlobally()) {
+            RenderBackground.renderBackground(context, instance.width, instance.height);
         }
         else {
             this.renderPanoramaBackground(context, deltaTick);

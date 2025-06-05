@@ -6,6 +6,7 @@
   "client": [
     "ClothConfigScreenMixin",
     "CreateWorldScreenMixin",
+    "MessageScreenMixin",
     "ScreenMixin",
     "TitleScreenMixin"
   ],
