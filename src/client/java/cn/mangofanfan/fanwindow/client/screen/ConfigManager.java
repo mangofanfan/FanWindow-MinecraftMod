@@ -46,8 +46,10 @@ public class ConfigManager {
 
     private ConfigManager() {
         configBuilder = ConfigBuilder.create().setTitle(Text.translatable("fanwindow.config.title"));
-        localBackgroundTextureIdentifier = new LocalBackgroundTextureIdentifier(CUSTOM_IMAGE);
         loadConfig();
+        if (config.getCustomPictureMode().equals(CustomPictureMode.ConfigDir)) {
+            localBackgroundTextureIdentifier = new LocalBackgroundTextureIdentifier(CUSTOM_IMAGE);
+        }
         configBuilder.setSavingRunnable(() -> {
             saveConfig();
             logger.info("Saving config of Fan Window.");
@@ -142,7 +144,7 @@ public class ConfigManager {
         customBackgroundCategory.addEntry(entryBuilder.startDropdownMenu(
                                 Text.translatable("fanwindow.config.customBackgroundImageMode"),
                                 DropdownMenuBuilder.TopCellElementBuilder.of(
-                                        config.getCustomPictureMod(),
+                                        config.getCustomPictureMode(),
                                         this::stringToCustomPictureMode,
                                         this::customPictureModeToString
                                 )
@@ -173,8 +175,10 @@ public class ConfigManager {
     }
 
     private void saveCustomPictureMode(CustomPictureMode customPictureMode) {
-        config.setCustomPictureMod(customPictureMode);
-        localBackgroundTextureIdentifier = new LocalBackgroundTextureIdentifier(CUSTOM_IMAGE);
+        config.setCustomPictureMode(customPictureMode);
+        if (config.getCustomPictureMode().equals(CustomPictureMode.ConfigDir)) {
+            localBackgroundTextureIdentifier = new LocalBackgroundTextureIdentifier(CUSTOM_IMAGE);
+        }
     }
 
     private BgPicture stringToBgPicture(String value) {
@@ -205,7 +209,7 @@ public class ConfigManager {
 
     public Identifier getBackgroundTexture() {
         Identifier identifier = null;
-        switch (config.getCustomPictureMod()) {
+        switch (config.getCustomPictureMode()) {
             case Disabled -> identifier = Identifier.of("fanwindow", config.getBgPicture().getPath());
             case ResourcePack -> identifier = Identifier.of("fanwindow", "textures/artwork/custom.png");
             case ConfigDir -> identifier = localBackgroundTextureIdentifier.getIdentifier();
@@ -215,7 +219,7 @@ public class ConfigManager {
 
     public int[] getBackgroundTextureSize() {
         int[] textureSize = {0, 0};
-        switch (config.getCustomPictureMod()) {
+        switch (config.getCustomPictureMode()) {
             case Disabled ->  textureSize = config.getBgPicture().getPicSize();
             case ResourcePack -> textureSize = new int[]{1600, 900};
             case ConfigDir ->  textureSize = localBackgroundTextureIdentifier.getTextureSize();

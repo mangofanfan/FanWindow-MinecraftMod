@@ -5,8 +5,8 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 
-public class RenderBackground {
-    public static void renderBackground(DrawContext context, int[] textureSize, int width, int height, Identifier bgTexture) {
+public class RenderBackgroundImpl extends RenderBackground {
+    public void renderBackground(DrawContext context, int[] textureSize, int width, int height, Identifier bgTexture) {
         // 确保渲染背景图片正确，即图片比例不变，且在裁切时总是保持中心位置。
         int[] regionSize = {0, 0};
         double var1 = (double) textureSize[0] / textureSize[1];
@@ -31,7 +31,7 @@ public class RenderBackground {
      * @param width 游戏屏幕宽度
      * @param height 游戏屏幕高度
      */
-    public static void renderBackground(DrawContext context, int width, int height) {
+    public void renderBackground(DrawContext context, int width, int height) {
         ConfigManager configManager = ConfigManager.getInstance();
         renderBackground(context, configManager.getBackgroundTextureSize(), width, height, configManager.getBackgroundTexture());
     }

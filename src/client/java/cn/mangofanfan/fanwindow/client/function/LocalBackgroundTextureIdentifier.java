@@ -2,6 +2,7 @@ package cn.mangofanfan.fanwindow.client.function;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.texture.*;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ public class LocalBackgroundTextureIdentifier {
     Identifier identifier;
     int[] textureSize;
     Logger logger = LoggerFactory.getLogger(LocalBackgroundTextureIdentifier.class);
+    SimpleToastBuilder toastBuilder =  new SimpleToastBuilder();
 
     public LocalBackgroundTextureIdentifier(Path filePath) {
         try {
@@ -30,6 +32,7 @@ public class LocalBackgroundTextureIdentifier {
             // 未找到图片的错误处理
             logger.warn("Error loading Local Background Texture in Config Dir at {}", filePath);
             logger.warn("If your Custom Background Picture Mode is ConfigDir, you will get a default image as background.");
+            toastBuilder.show(Text.translatable("fanwindow.toast.localIdentifierNotFound.title"), Text.translatable("fanwindow.toast.localIdentifierNotFound.description"));
             identifier = Identifier.of("fanwindow", "textures/artwork/custom.png");
             textureSize = new int[]{1600, 900};
         }

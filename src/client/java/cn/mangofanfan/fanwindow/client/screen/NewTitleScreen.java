@@ -1,7 +1,7 @@
 package cn.mangofanfan.fanwindow.client.screen;
 
 import cn.mangofanfan.fanwindow.client.GlobalState;
-import cn.mangofanfan.fanwindow.client.function.RenderBackground;
+import cn.mangofanfan.fanwindow.client.function.RenderBackgroundImpl;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.LogoDrawer;
@@ -191,7 +191,7 @@ public class NewTitleScreen extends Screen {
             super.renderBackground(context, mouseX, mouseY, deltaTicks);
         }
         else {
-            RenderBackground.renderBackground(context, width, height);
+            new RenderBackgroundImpl().renderBackground(context, width, height);
         }
     }
 

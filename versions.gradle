@@ -22,7 +22,7 @@ ext {
                     modmenu_version: v1212_modmenu_version,
                     versioned_scr: v1212_versioned_scr,
                     publish_minecraft_version: ">=1.21.2 <1.21.4",
-                    mod_sign: "mc1.22+mc1.21.3"
+                    mod_sign: "mc1.21.2+mc1.21.3"
             ],
             "1.21.3": [
                     yarn_mappings: v1213_yarn_mappings,
@@ -30,7 +30,7 @@ ext {
                     modmenu_version: v1213_modmenu_version,
                     versioned_scr: v1213_versioned_scr,
                     publish_minecraft_version: ">=1.21.2 <1.21.4",
-                    mod_sign: "mc1.22+mc1.21.3"
+                    mod_sign: "mc1.21.2+mc1.21.3"
             ],
             "1.21.4": [
                     yarn_mappings: v1214_yarn_mappings,

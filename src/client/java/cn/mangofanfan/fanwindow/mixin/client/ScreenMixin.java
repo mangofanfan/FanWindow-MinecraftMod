@@ -1,6 +1,6 @@
 package cn.mangofanfan.fanwindow.mixin.client;
 
-import cn.mangofanfan.fanwindow.client.function.RenderBackground;
+import cn.mangofanfan.fanwindow.client.function.RenderBackgroundImpl;
 import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.MinecraftClient;
@@ -39,7 +39,7 @@ public abstract class ScreenMixin extends AbstractParentElement implements Drawa
             Logger logger = LoggerFactory.getLogger("ScreenMixin");
             logger.debug("ScreenMixin is ready to change global background.");
             if (configManager.config.isUseNewBackgroundGlobally()) {
-                RenderBackground.renderBackground(context, width, height);
+                new RenderBackgroundImpl().renderBackground(context, width, height);
                 logger.debug("ScreenMixin background has been rendered.");
                 ci.cancel();
             }

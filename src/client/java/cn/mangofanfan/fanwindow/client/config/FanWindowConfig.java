@@ -56,11 +56,11 @@ public class FanWindowConfig {
         this.useNewCreateWorldScreen = useNewCreateWorldScreen;
     }
 
-    public CustomPictureMode getCustomPictureMod() {
+    public CustomPictureMode getCustomPictureMode() {
         return customPictureMode;
     }
 
-    public void setCustomPictureMod(CustomPictureMode customPictureMode) {
+    public void setCustomPictureMode(CustomPictureMode customPictureMode) {
         this.customPictureMode = customPictureMode;
     }
 }
