@@ -189,16 +189,28 @@ tasks.register('buildAllVersions') {
     description 'Builds the mod for all supported Minecraft versions'
 
     doLast {
+        // 定义需要构建的目标 Minecraft 版本
         def versions = ["1.21", "1.21.2", "1.21.4", "1.21.5"]
         def total = versions.size()
         def current = 1
 
         versions.each { version ->
             logger.lifecycle("\n>>> [${current}/${total}] Building for Minecraft ${version}")
-            exec {
+
+            // 使用 project.exec(Action) 代替 Groovy DSL exec(Closure)
+            // project.exec 是在 doLast 块中执行外部命令的推荐方式。
+            project.exec {
+                // 设置工作目录为项目根目录
                 workingDir projectDir
-                commandLine = ["./gradle", "build", "-Ptarget_version=${version}", "--stacktrace"]
+
+                // 定义要执行的命令及其参数
+                // 注意：这里传递了 -Ptarget_version=${version} 作为属性
+                commandLine = ["./gradlew", "build", "-Ptarget_version=${version}", "--stacktrace"]
+
+                // 确保命令执行成功，否则构建失败
+                ignoreExitValue = false
             }
+
             current++
         }
     }
