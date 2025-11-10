@@ -130,12 +130,12 @@ jar {
     }
 
     archiveBaseName = "fanwindow"
-    archiveVersion = "${project.version}-${project.mod_sign}"
+    archiveVersion = "${project.mod_sign}-${project.version}"
 }
 
 sourcesJar {
     archiveBaseName = "fanwindow"
-    archiveVersion = "${project.version}-${project.mod_sign}"
+    archiveVersion = "${project.mod_sign}-${project.version}"
     archiveClassifier = "sources"
     from sourceSets.main.allSource
 }
