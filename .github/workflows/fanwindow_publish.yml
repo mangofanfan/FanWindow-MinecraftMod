@@ -27,7 +27,7 @@ jobs:
           run: chmod +x ./gradlew
 
         - name: 构建
-          run: ./gradlew clean buildAllVersions
+          run: ./gradlew buildAllVersions
 
         - name: 发布
           uses: Kir-Antipov/mc-publish@v3.3
