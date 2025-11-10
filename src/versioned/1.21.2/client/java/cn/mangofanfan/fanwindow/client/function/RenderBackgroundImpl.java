@@ -1,6 +1,6 @@
 package cn.mangofanfan.fanwindow.client.function;
 
-import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
+import cn.mangofanfan.fanwindow.client.config.ConfigManager;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;

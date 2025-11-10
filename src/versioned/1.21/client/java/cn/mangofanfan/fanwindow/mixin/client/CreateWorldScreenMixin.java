@@ -1,6 +1,6 @@
 package cn.mangofanfan.fanwindow.mixin.client;
 
-import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
+import cn.mangofanfan.fanwindow.client.config.ConfigManager;
 import cn.mangofanfan.fanwindow.client.screen.NewCreateWorldScreenGameTab;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.world.CreateWorldScreen;
