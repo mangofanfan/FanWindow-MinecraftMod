@@ -33,10 +33,10 @@ jobs:
         - name: 发布
           uses: Kir-Antipov/mc-publish@v3.3
           with:
-            curseforge-id: ${{ env.CURSEFORGE_ID }}
+            curseforge-id: ${{ vars.CURSEFORGE_ID }}
             curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
-            modrinth-id: ${{ env.MODRINTH_ID }}
+            modrinth-id: ${{ vars.MODRINTH_ID }}
             modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
             github-token: ${{ secrets._GITHUB_TOKEN }}
@@ -48,3 +48,6 @@ jobs:
             java: 21
 
             loaders: fabric
+
+            game-versions: |
+              - 1.21.4
