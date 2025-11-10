@@ -34,4 +34,4 @@ jobs:
           with:
             curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
             modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+            github-token: ${{ secrets._GITHUB_TOKEN }}
