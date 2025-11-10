@@ -50,4 +50,4 @@ jobs:
             loaders: fabric
 
             game-versions: |
-              - 1.21.5
+              1.21.5
