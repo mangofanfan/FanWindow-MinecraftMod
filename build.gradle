@@ -183,6 +183,7 @@ publishing {
 }
 
 // ========== 添加多版本构建任务 ==========
+// 从此刻起，此任务只能在Linux机器中执行。
 tasks.register('buildAllVersions') {
     group 'build'
     description 'Builds the mod for all supported Minecraft versions'
@@ -196,7 +197,7 @@ tasks.register('buildAllVersions') {
             logger.lifecycle("\n>>> [${current}/${total}] Building for Minecraft ${version}")
             exec {
                 workingDir projectDir
-                commandLine = ["gradle.bat", "build", "-Ptarget_version=${version}", "--stacktrace"]
+                commandLine = ["gradle", "build", "-Ptarget_version=${version}", "--stacktrace"]
             }
             current++
         }
