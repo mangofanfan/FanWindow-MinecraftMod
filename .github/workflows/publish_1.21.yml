@@ -53,4 +53,4 @@ jobs:
               1.21
               1.21.1
 
-            version-types: release
+            version: mc1.21+mc1.21.1-1.2.4
