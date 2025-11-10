@@ -39,9 +39,6 @@ jobs:
             modrinth-id: ${{ vars.MODRINTH_ID }}
             modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
-            github-token: ${{ secrets._GITHUB_TOKEN }}
-            github-generate-changelog: true
-
             version-type: release
             changelog-file: CHANGELOG.md
 
