@@ -197,7 +197,7 @@ tasks.register('buildAllVersions') {
             logger.lifecycle("\n>>> [${current}/${total}] Building for Minecraft ${version}")
             exec {
                 workingDir projectDir
-                commandLine = ["gradle", "build", "-Ptarget_version=${version}", "--stacktrace"]
+                commandLine = ["./gradle", "build", "-Ptarget_version=${version}", "--stacktrace"]
             }
             current++
         }
