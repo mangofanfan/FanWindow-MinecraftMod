@@ -13,7 +13,7 @@
     }
   ],
   "contact": {
-    "homepage": "https://mangofanfan.cn/",
+    "homepage": "https://fanfan.moe/",
     "sources": "https://github.com/mangofanfan/FanWindow-MinecraftMod",
     "issues": "https://github.com/mangofanfan/FanWindow-MinecraftMod/issues"
   },
@@ -54,6 +54,10 @@
         "fanwindow.modmenu.afdian": "https://afdian.com/a/mangofanfan-w",
         "modmenu.kofi": "https://ko-fi.com/mangofanfan"
       }
+    },
+    "mc-publish": {
+      "modrinth": "CaEMTaH5",
+      "curseforge": 1277478
     }
   }
 }

@@ -1,0 +1,37 @@
+name: fanwindow_publish.yml
+
+on: [ pull_request, workflow_dispatch ]
+
+permissions: write-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - name: 检查环境变量
+          run: env
+
+        - name: 签出存储库
+          uses: actions/checkout@v3
+          with:
+            submodules: true
+
+        - name: 设置 Java
+          uses: actions/setup-java@v2
+          with:
+            distribution: "temurin"
+            java-version: 21
+
+        - name: 使 Gradle Wrapper 可执行
+          if: ${{ runner.os != 'Windows' }}
+          run: chmod +x ./gradlew
+
+        - name: 构建
+          run: ./gradlew clean buildAllVersions
+
+        - name: 发布
+          uses: Kir-Antipov/mc-publish@v3.3
+          with:
+            curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+            modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+            github-token: ${{ secrets.GITHUB_TOKEN }}
