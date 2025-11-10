@@ -47,4 +47,4 @@ jobs:
 
             java: 21
 
-            loader: fabric
+            loaders: fabric
