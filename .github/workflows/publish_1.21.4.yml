@@ -1,0 +1,50 @@
+name: publish_1.21.4.yml
+
+on: [ pull_request, workflow_dispatch ]
+
+permissions: write-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+        - name: 检查环境变量
+          run: env
+
+        - name: 签出存储库
+          uses: actions/checkout@v3
+          with:
+            submodules: true
+
+        - name: 设置 Java
+          uses: actions/setup-java@v2
+          with:
+            distribution: "temurin"
+            java-version: 21
+
+        - name: 使 Gradle Wrapper 可执行
+          if: ${{ runner.os != 'Windows' }}
+          run: chmod +x ./gradlew
+
+        - name: 构建
+          run: ./gradlew build -Ptarget_version=1.21.4
+
+        - name: 发布
+          uses: Kir-Antipov/mc-publish@v3.3
+          with:
+            curseforge-id: ${{ env.CURSEFORGE_ID }}
+            curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+            modrinth-id: ${{ env.MODRINTH_ID }}
+            modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+            github-token: ${{ secrets._GITHUB_TOKEN }}
+            github-generate-changelog: true
+
+            version-type: release
+            changelog-file: CHANGELOG.md
+
+            java: 21
+
+            loaders: fabric

@@ -1,4 +1,4 @@
-name: fanwindow_publish.yml
+name: publish_1.21.5.yml
 
 on: [ pull_request, workflow_dispatch ]
 
@@ -28,15 +28,15 @@ jobs:
           run: chmod +x ./gradlew
 
         - name: 构建
-          run: ./gradlew buildAllVersions
+          run: ./gradlew build -Ptarget_version=1.21.5
 
         - name: 发布
           uses: Kir-Antipov/mc-publish@v3.3
           with:
-            curseforge-id: 1277478
+            curseforge-id: ${{ env.CURSEFORGE_ID }}
             curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
-            modrinth-id: "CaEMTaH5"
+            modrinth-id: ${{ env.MODRINTH_ID }}
             modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
             github-token: ${{ secrets._GITHUB_TOKEN }}
