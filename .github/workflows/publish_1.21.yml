@@ -52,3 +52,5 @@ jobs:
             game-versions: |
               1.21
               1.21.1
+
+            version-types: release
