@@ -1,6 +1,6 @@
 package cn.mangofanfan.fanwindow.modmenu;
 
-import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
+import cn.mangofanfan.fanwindow.client.config.ConfigManager;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 

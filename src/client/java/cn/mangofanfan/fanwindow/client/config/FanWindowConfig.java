@@ -8,12 +8,11 @@ package cn.mangofanfan.fanwindow.client.config;
  */
 public class FanWindowConfig {
     private boolean useNewTitleScreen = true;
-    private boolean useNewBackgroundGlobally = false;
+    private boolean disableVanillaTitleScreen = false;
+    private boolean useNewBackgroundGlobally = true;
     private boolean useNewBackgroundInNewScreen = true;
     private boolean useNewCreateWorldScreen = true;
-
     private CustomPictureMode customPictureMode = CustomPictureMode.Disabled;
-
     private BgPicture bgPicture = BgPicture.Spring_to_Life_Artwork_png;
 
     public boolean isUseNewTitleScreen() {
@@ -62,5 +61,13 @@ public class FanWindowConfig {
 
     public void setCustomPictureMode(CustomPictureMode customPictureMode) {
         this.customPictureMode = customPictureMode;
+    }
+
+    public boolean isDisableVanillaTitleScreen() {
+        return disableVanillaTitleScreen;
+    }
+
+    public void setDisableVanillaTitleScreen(boolean disableVanillaTitleScreen) {
+        this.disableVanillaTitleScreen = disableVanillaTitleScreen;
     }
 }

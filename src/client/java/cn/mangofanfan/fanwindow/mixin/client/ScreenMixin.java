@@ -1,7 +1,7 @@
 package cn.mangofanfan.fanwindow.mixin.client;
 
 import cn.mangofanfan.fanwindow.client.function.RenderBackgroundImpl;
-import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
+import cn.mangofanfan.fanwindow.client.config.ConfigManager;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.AbstractParentElement;

@@ -16,6 +16,34 @@ CurseForge：<https://www.curseforge.com/minecraft/mc-mods/fan-window>
 
 PS：实际上目前并没有用到Fabric API的任何内容，因此似乎理论上可以无缝切换到Forge等……算惹再说吧。
 
+## Maven仓库
+
+如果你（应该没有这种如果吧）想要进一步研究FanWindow，请添加以下Maven仓库：
+
+```
+https://maven.fanfan.moe/repository/maven-releases/
+```
+
+也就是将你的build.gradle或者build.gradle.kt改成像这样：
+
+```
+repositories {
+    // Add repositories to retrieve artifacts from in here.
+    // You should only use this when depending on other mods because
+    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
+    // for more information about repositories.
+    
+    ...
+    
+    maven {
+        url = "https://maven.fanfan.moe/repository/maven-public/"
+    }
+}
+```
+
+然后添加`cn.mangofanfan.fanwindow:1.2.3`即可。仓库中拥有模组版本1.2.3（MC 1.21.5）。
+
 ---
 
 ## 图
@@ -29,6 +57,8 @@ PS：实际上目前并没有用到Fabric API的任何内容，因此似乎理�
 ![FanWindow Config](/res/FanWindow%20Config.png)
 
 ## 继续定制
+
+更详细的定制背景教程可在<https://fanfan.moe/forum-post/78.html>中查看~
 
 模组的配置页面允许配置各功能的开启与关闭，并在提供的多张背景图片中进行选择、自定义背景或使用原版的全景背景。所有提供的图像的长宽比例均为16:9，会随游戏窗口变化进行中心裁切。
 

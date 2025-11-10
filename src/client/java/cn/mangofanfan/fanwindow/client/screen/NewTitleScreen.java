@@ -1,7 +1,9 @@
 package cn.mangofanfan.fanwindow.client.screen;
 
 import cn.mangofanfan.fanwindow.client.GlobalState;
+import cn.mangofanfan.fanwindow.client.config.ConfigManager;
 import cn.mangofanfan.fanwindow.client.function.RenderBackgroundImpl;
+import cn.mangofanfan.fanwindow.client.function.SimpleToastBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.LogoDrawer;
@@ -17,7 +19,6 @@ import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextIconButtonWidget;
-import net.minecraft.client.toast.SystemToast;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ public class NewTitleScreen extends Screen {
 
     private final LogoDrawer logoDrawer;
     ConfigManager configManager;
+    SimpleToastBuilder toastBuilder;
 
     // 单人游戏
     private volatile ButtonWidget singlePlayerButton;
@@ -49,10 +51,8 @@ public class NewTitleScreen extends Screen {
     private volatile TextIconButtonWidget accessibilityOptionButton;
     // 版权
     private volatile ButtonWidget copyrightButton;
-    // 设置按钮
-    private volatile ButtonWidget configButton;
-    // ModMenu支持
-    private volatile ButtonWidget modMenuButton;
+    // 设置按钮 或 模组菜单按钮
+    private volatile ButtonWidget modsButton;
 
     private final GlobalState globalState;
     private static final Logger logger = LoggerFactory.getLogger(NewTitleScreen.class);
@@ -63,6 +63,7 @@ public class NewTitleScreen extends Screen {
         globalState = GlobalState.getInstance();
         logoDrawer = new LogoDrawer(false);
         configManager = ConfigManager.getInstance();
+        toastBuilder = new SimpleToastBuilder();
     }
 
     @Override
@@ -91,13 +92,7 @@ public class NewTitleScreen extends Screen {
                 button -> client.scheduleStop())
                 .dimensions(cenX + 65, cenY + 65, 60, 60)
                 .build();
-        this.toggleButton = ButtonWidget.builder(Text.of("</>"),
-                        button -> {
-                            GlobalState globalState = GlobalState.getInstance();
-                            globalState.setStarted(true);
-                            globalState.setNewMainWindowInUse(false);
-                            client.setScreen(new TitleScreen());
-                        })
+        this.toggleButton = this.getToggleButtonBuilder()
                 .dimensions(cenX + 130, cenY, 27, 27)
                 .build();
         this.languageOptionButton = AccessibilityOnboardingButtons.createLanguageButton(27,
@@ -124,35 +119,25 @@ public class NewTitleScreen extends Screen {
         this.addDrawableChild(accessibilityOptionButton);
         this.addDrawableChild(copyrightButton);
 
-        // 如果有ModMenu则添加打开ModsScreen的按钮
-        if (globalState.isModMenuSupport()) {
-            try {
-                Class<?> ModsScreen = Class.forName("com.terraformersmc.modmenu.gui.ModsScreen");
-                Class<?>[] paramTypes = { Screen.class };
-                ButtonWidget.Builder builder = getBuilder(ModsScreen, paramTypes);
-                this.modMenuButton = builder.build();
-                this.addDrawableChild(modMenuButton);
-            } catch (ClassNotFoundException e) {
-                logger.error("Could not load ModsScreen while ModMenu is already loaded : ", e);
-            }
-        }
-        // 否则添加打开本模组配置页面的按钮
-        else {
-            this.configButton = ButtonWidget.builder(Text.translatable("fanwindow.config"),
-                            button -> {
-                                ConfigManager configManager = ConfigManager.getInstance();
-                                client.setScreen(configManager.getScreen(this));
-                                logger.debug("Open FanWindow ConfigScreen from FanWindow Title Screen.");
-                            })
+        // 若未禁用原版标题屏幕，则配置与模组菜单按钮应当位于此处
+        if (!configManager.config.isDisableVanillaTitleScreen()) {
+            this.modsButton = this.getModsButtonBuilder(Text.translatable("category.modmenu.name"), Text.translatable("fanwindow.config"))
                     .dimensions(cenX, cenY + 130, 60, 27)
                     .build();
-            this.addDrawableChild(configButton);
+            this.addDrawableChild(modsButton);
         }
     }
 
-    // 此方法只用来打开ModsScreen屏幕
-    private ButtonWidget.@NotNull Builder getBuilder(Class<?> ModsScreen, Class<?>[] paramTypes) {
-        ButtonWidget.Builder builder = ButtonWidget.builder(Text.translatable("category.modmenu.name"),
+    /**
+     * <p>获取足以打开 ModMenu 提供的 ModsScreen 屏幕的按钮 Builder。</p>
+     * <p>若 ModMenu 未加载，本方法将抛出 ClassNotFoundException 错误，应当在调用时接收并处理此错误。</p>
+     * @param name 按钮上的文本
+     * @return 按钮 Builder
+     */
+    private ButtonWidget.@NotNull Builder getModsScreenButtonBuilder(Text name) throws ClassNotFoundException {
+        Class<?> ModsScreen = Class.forName("com.terraformersmc.modmenu.gui.ModsScreen");
+        Class<?>[] paramTypes = { Screen.class };
+        ButtonWidget.Builder builder = ButtonWidget.builder(name,
                 button -> {
                     try {
                         client.setScreen((Screen) ModsScreen.getDeclaredConstructor(paramTypes).newInstance(this));
@@ -160,15 +145,60 @@ public class NewTitleScreen extends Screen {
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                              NoSuchMethodException e) {
                         logger.error("Could not instantiate ModsScreen while ModMenu is already loaded : ", e);
-                        client.getToastManager().
-                                add(SystemToast.create(client,
-                                        SystemToast.Type.UNSECURE_SERVER_WARNING,
-                                        Text.translatable("fanwindow.modmenu.modsScreenFailed.title"),
-                                        Text.translatable("fanwindow.modmenu.modsScreenFailed.description")));
+                        toastBuilder.show(
+                                Text.translatable("fanwindow.modmenu.modsScreenFailed.title"),
+                                Text.translatable("fanwindow.modmenu.modsScreenFailed.description"));
                     }
                 });
         builder.dimensions(cenX, cenY + 130, 60, 27);
         return builder;
+    }
+
+    /**
+     * 根据 ModMenu 加载情况，获取不同的按钮 Builder。
+     * @param name1 若 ModMenu 已加载，获取的打开 ModsScreen 的按钮上的文本
+     * @param name2 若 ModMenu 未加载，获取的打开配置屏幕的按钮上的文本
+     * @return 按钮 Builder
+     */
+    private ButtonWidget.@NotNull Builder getModsButtonBuilder(Text name1, Text name2) {
+        // 如果有ModMenu则添加打开ModsScreen的按钮
+        if (globalState.isModMenuSupport()) {
+            try {
+                return this.getModsScreenButtonBuilder(name1);
+            } catch (ClassNotFoundException e) {
+                logger.error("Could not load ModsScreen while ModMenu is already loaded : ", e);
+                throw new RuntimeException(e);
+            }
+        }
+        // 否则添加打开本模组配置页面的按钮
+        else {
+            return ButtonWidget.builder(name2,
+                            button -> {
+                                client.setScreen(configManager.getScreen(this));
+                                logger.debug("Open FanWindow ConfigScreen from FanWindow Title Screen.");
+                            });
+        }
+    }
+
+    /**
+     * 根据设置，获取切换标题屏幕或 {@link NewTitleScreen#getModsButtonBuilder(Text, Text)} 的按钮 Builder。
+     * @return 按钮 Builder
+     */
+    private ButtonWidget.@NotNull Builder getToggleButtonBuilder() {
+        // 若未禁用原版标题屏幕，则创建切换标题屏幕的按钮
+        if (!configManager.config.isDisableVanillaTitleScreen()) {
+            return ButtonWidget.builder(Text.of("</>"),
+                    button -> {
+                        GlobalState globalState = GlobalState.getInstance();
+                        globalState.setStarted(true);
+                        globalState.setNewMainWindowInUse(false);
+                        client.setScreen(new TitleScreen());
+                    });
+        }
+        // 否则，创建打开模组菜单或配置屏幕的按钮
+        else {
+            return getModsButtonBuilder(Text.of("</>"), Text.of("</>"));
+        }
     }
 
     @Override

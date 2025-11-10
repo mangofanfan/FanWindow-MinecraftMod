@@ -170,11 +170,20 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+        maven {
+            name = "maven-release"
+            url = uri("https://maven.fanfan.moe/repository/maven-releases/")
+
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
     }
 }
 
 // ========== 添加多版本构建任务 ==========
-task buildAllVersions {
+tasks.register('buildAllVersions') {
     group 'build'
     description 'Builds the mod for all supported Minecraft versions'
 

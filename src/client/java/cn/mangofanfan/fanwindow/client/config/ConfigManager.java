@@ -1,8 +1,5 @@
-package cn.mangofanfan.fanwindow.client.screen;
+package cn.mangofanfan.fanwindow.client.config;
 
-import cn.mangofanfan.fanwindow.client.config.BgPicture;
-import cn.mangofanfan.fanwindow.client.config.CustomPictureMode;
-import cn.mangofanfan.fanwindow.client.config.FanWindowConfig;
 import cn.mangofanfan.fanwindow.client.function.LocalBackgroundTextureIdentifier;
 import com.google.gson.Gson;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
@@ -116,6 +113,14 @@ public class ConfigManager {
                         .setDefaultValue(true)
                         .setTooltip(Text.translatable("fanwindow.config.useNewTitleScreen.description"))
                         .setSaveConsumer(newValue -> config.setUseNewTitleScreen(newValue))
+                        .build());
+        generalCategory.addEntry(entryBuilder.startBooleanToggle(
+                                Text.translatable("fanwindow.config.disableVanillaTitleScreen"),
+                                config.isDisableVanillaTitleScreen()
+                        )
+                        .setDefaultValue(false)
+                        .setTooltip(Text.translatable("fanwindow.config.disableVanillaTitleScreen.description"))
+                        .setSaveConsumer(newValue -> config.setDisableVanillaTitleScreen(newValue))
                         .build());
         generalCategory.addEntry(entryBuilder.startBooleanToggle(
                                 Text.translatable("fanwindow.config.useNewCreateWorldScreen"),

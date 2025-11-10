@@ -3,7 +3,7 @@
   "id": "fanwindow",
   "version": "${version}",
   "name": "FanWindow",
-  "description": "Have a different Title Screen !",
+  "description": "Have a different Title Screen !\nThis mod provides a new title screen to replace the vanilla title screen, and allow you replace all vanilla background. Created by Java, and can work with ModMenu.",
   "authors": [
     {
       "name": "MangoFanFanw",
@@ -50,7 +50,9 @@
   "custom": {
     "modmenu": {
       "links": {
-        "website": "https://mangofanfan.cn/"
+        "fanwindow.modmenu.website": "https://mangofanfan.cn/",
+        "fanwindow.modmenu.afdian": "https://afdian.com/a/mangofanfan-w",
+        "modmenu.kofi": "https://ko-fi.com/mangofanfan"
       }
     }
   }

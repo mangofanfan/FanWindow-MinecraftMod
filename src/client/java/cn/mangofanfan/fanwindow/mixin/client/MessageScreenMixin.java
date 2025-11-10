@@ -1,7 +1,7 @@
 package cn.mangofanfan.fanwindow.mixin.client;
 
 import cn.mangofanfan.fanwindow.client.function.RenderBackgroundImpl;
-import cn.mangofanfan.fanwindow.client.screen.ConfigManager;
+import cn.mangofanfan.fanwindow.client.config.ConfigManager;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.MessageScreen;
 import net.minecraft.client.gui.screen.Screen;
