@@ -7,6 +7,7 @@ permissions: write-all
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
         - name: 检查环境变量
           run: env
@@ -39,3 +40,11 @@ jobs:
             modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
             github-token: ${{ secrets._GITHUB_TOKEN }}
+            github-generate-changelog: true
+
+            version-type: release
+            changelog-file: CHANGELOG.md
+
+            java: 21
+
+            loader: fabric
