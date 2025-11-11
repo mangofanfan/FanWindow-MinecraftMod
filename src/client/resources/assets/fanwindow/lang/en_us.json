@@ -13,6 +13,7 @@
   "fanwindow.config.description": "FanWindow is a mod only for redesigning your client screen. Contact with me for any problem.\nYou might need to restart Minecraft to make your changes in use.",
   "fanwindow.config.background": "Choose background picture",
   "fanwindow.config.background.description": "If in Disabled Mode, Pictures here will be shown as the New Background. Otherwise this option will be ignored.\nAt the end of the filename, use '_png' to replace with '.png'.",
+  "fanwindow.config.background.versionFeaturedDescription": "Default picture will be decided from your running Minecraft version. Now, default picture is %1$s because of Minecraft %2$s ~",
   "fanwindow.config.useNewBackgroundGlobally": "Use new Background instead of vanilla screen background",
   "fanwindow.config.useNewBackgroundGlobally.description": "New background will replace all screen that use vanilla background globally.",
   "fanwindow.config.useNewBackgroundInNewScreen": "Use new Background in New Screen",

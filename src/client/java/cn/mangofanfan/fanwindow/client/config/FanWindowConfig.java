@@ -13,7 +13,7 @@ public class FanWindowConfig {
     private boolean useNewBackgroundInNewScreen = true;
     private boolean useNewCreateWorldScreen = true;
     private CustomPictureMode customPictureMode = CustomPictureMode.Disabled;
-    private BgPicture bgPicture = BgPicture.Spring_to_Life_Artwork_png;
+    private BgPicture bgPicture = DefaultBgPictureGetter.getDefaultBgPicture();
 
     public boolean isUseNewTitleScreen() {
         return useNewTitleScreen;

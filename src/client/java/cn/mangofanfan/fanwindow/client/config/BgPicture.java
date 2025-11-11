@@ -24,13 +24,16 @@ public enum BgPicture {
      * 棘巧试炼的官方艺术作品 1.21
      */
     Tricky_Trials_Artwork_png("Tricky_Trials_Artwork.png"),
+    /**
+     * 铜器时代 1.21.9
+     */
+    The_Copper_Age_Key_Art_png("The_Copper_Age_Key_Art.png"),
 
     /**
      * 末影龙
      */
     Ender_Dragon_png("Ender_Dragon.png");
 
-    // TODO 重构自定义模式
 
     private final String picName;
     BgPicture(String image) {
@@ -93,6 +96,10 @@ public enum BgPicture {
             case Ender_Dragon_png:
                 size[0] = 1600;
                 size[1] = 900;
+                break;
+            case The_Copper_Age_Key_Art_png:
+                size[0] = 1920;
+                size[1] = 1350;
                 break;
         }
         return size;

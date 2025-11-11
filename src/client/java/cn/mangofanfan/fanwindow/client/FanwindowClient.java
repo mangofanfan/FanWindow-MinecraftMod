@@ -12,6 +12,7 @@ public class FanwindowClient implements ClientModInitializer {
 
         Logger logger = LoggerFactory.getLogger("FanWindowClient");
         GlobalState globalState = GlobalState.getInstance();
+        logger.info("Running on Minecraft Version: {}", FabricLoader.getInstance().getRawGameVersion());
 
         if (FabricLoader.getInstance().isModLoaded("modmenu")) {
             logger.info("ModMenu is loaded. Specifical support enabled.");

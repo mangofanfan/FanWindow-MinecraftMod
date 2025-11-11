@@ -13,6 +13,7 @@
   "fanwindow.config.description": "芒果窗是一个只负责修改客户端屏幕的模组。如有任何问题，请与我联系。\n您可能需要重新启动 Minecraft 来确保更改生效。",
   "fanwindow.config.background": "选择背景图片",
   "fanwindow.config.background.description": "在 Disabled 模式下，这里的图片将会作为新背景图片；否则此设置会被忽略。\n在文件名的末尾需要用‘_png’代替‘.png’。",
+  "fanwindow.config.background.versionFeaturedDescription": "默认图片由当前运行的 Minecraft 版本决定。目前的默认图片是 %1$s 因为目前正在游玩 Minecraft %2$s ~",
   "fanwindow.config.useNewBackgroundGlobally": "使用新背景图片替换原版背景",
   "fanwindow.config.useNewBackgroundGlobally.description": "新背景图片会全局替换任何使用原版背景的屏幕。",
   "fanwindow.config.useNewBackgroundInNewScreen": "在新屏幕中使用新背景图片",

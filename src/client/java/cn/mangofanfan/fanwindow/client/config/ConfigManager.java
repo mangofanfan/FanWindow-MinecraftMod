@@ -168,11 +168,16 @@ public class ConfigManager {
                                 this::bgPictureToText
                         )
                 )
-                .setDefaultValue(BgPicture.Tricky_Trials_Artwork_png)
+                .setDefaultValue(DefaultBgPictureGetter.getDefaultBgPicture())
                 .setTooltip(Text.translatable("fanwindow.config.background.description"))
                 .setSelections(List.of(BgPicture.values()))
                 .setSaveConsumer(this::saveBgPicture)
                 .build());
+        customBackgroundCategory.addEntry(
+                entryBuilder.startTextDescription(
+                        Text.translatable("fanwindow.config.background.versionFeaturedDescription",
+                                DefaultBgPictureGetter.getDefaultBgPicture().getPicName(), FabricLoader.getInstance().getRawGameVersion())
+                ).build());
     }
 
     private void saveBgPicture(BgPicture bgPicture) {
