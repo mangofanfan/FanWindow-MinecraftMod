@@ -1,6 +1,7 @@
 package cn.mangofanfan.fanwindow.client.screen.widget;
 
 import net.minecraft.client.gl.RenderPipelines;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
@@ -68,12 +69,17 @@ public class GameModeCardWidget extends ClickableWidget {
         context.drawTexture(RenderPipelines.GUI_TEXTURED, modePicture, getX() + 1, getY() + 1,  0, 0, width - 2, height - 2, width - 2, height - 2);
         context.fill(getX() + 1, getY() + 71, getX() + width - 1, getY() + height - 1, strongBgColor);
         context.drawWrappedText(screen.getTextRenderer(), strongText, getX() + 5, getY() + 76, width - 12, strongColor, false);
-        context.drawBorder(getX(), getY(), width, height, borderColor);
+        // context.drawBorder(getX(), getY(), width, height, borderColor);
+        // 绘制边框的方法不知道到哪里去了，所以先手绘一个差不多的边框叭（委屈巴巴）
+        context.drawHorizontalLine(getX(), getX() + width - 1, getY(), borderColor);
+        context.drawHorizontalLine(getX(), getX() + width - 1, getY() + height - 1, borderColor);
+        context.drawVerticalLine(getX(), getY(), getY() + height, borderColor);
+        context.drawVerticalLine(getX() + width - 1, getY(), getY() + height, borderColor);
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY) {
-        super.onClick(mouseX, mouseY);
+    public void onClick(Click click, boolean doubled) {
+        super.onClick(click, doubled);
         worldCreator.setGameMode(mode);
     }
 

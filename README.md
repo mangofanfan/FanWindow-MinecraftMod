@@ -4,6 +4,8 @@ Have a different Title Screen !
 
 拥有一个与众不同的标题屏幕!
 
+**芒果窗的主要功能已经完成更新，目前不考虑在此模组中增加新的功能，今后的工作仅在于问题修复与兼容后续版本。**
+
 ## 获取
 
 Modrinth: <https://modrinth.com/mod/fan-window>
