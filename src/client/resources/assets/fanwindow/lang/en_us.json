@@ -27,5 +27,10 @@
   "fanwindow.toast.localIdentifierNotFound.title": "Local picture in config dir NOT FOUND.",
   "fanwindow.toast.localIdentifierNotFound.description": "Fall back to Default picture. Please check your config dir to make sure custom.png is existed and restart Minecraft.",
   "fanwindow.config.disableVanillaTitleScreen": "Disable vanilla Title Screen",
-  "fanwindow.config.disableVanillaTitleScreen.description": "Remove the button to toggle Title Screen in New Title Screen to disable vanilla Title Screen in fact.\nIf 「Use New FanWindow Title Screen」 is FALSE, this will be ignored."
+  "fanwindow.config.disableVanillaTitleScreen.description": "Remove the button to toggle Title Screen in New Title Screen to disable vanilla Title Screen in fact.\nIf 「Use New FanWindow Title Screen」 is FALSE, this will be ignored.",
+  "fanwindow.config.functional": "Functional Config",
+  "fanwindow.config.exitMinecraftConfirm": "Need confirm when exit Minecraft client",
+  "fanwindow.config.exitWorldConfirm": "Need confirm when exit world",
+  "fanwindow.config.exitMinecraftConfirm.description": "Need to enable UseNewTitleScreen.",
+  "gui.fanwindow.exit_confirm": "Confirm to EXIT ?"
 }

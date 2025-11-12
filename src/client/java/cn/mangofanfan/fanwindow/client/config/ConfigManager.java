@@ -32,6 +32,7 @@ public class ConfigManager {
     private final ConfigBuilder configBuilder;
     private ConfigCategory generalCategory;
     private ConfigCategory customBackgroundCategory;
+    private ConfigCategory functionalCategory;
     private LocalBackgroundTextureIdentifier localBackgroundTextureIdentifier;
 
     /**
@@ -99,12 +100,14 @@ public class ConfigManager {
         if (generalCategory != null && customBackgroundCategory != null) {
             generalCategory.removeCategory();
             customBackgroundCategory.removeCategory();
+            functionalCategory.removeCategory();
         }
 
         // 加载配置项目
         ConfigEntryBuilder entryBuilder = ConfigEntryBuilder.create();
         generalCategory = configBuilder.getOrCreateCategory(Text.translatable("fanwindow.config.general"));
         customBackgroundCategory = configBuilder.getOrCreateCategory(Text.translatable("fanwindow.config.customBackground"));
+        functionalCategory = configBuilder.getOrCreateCategory(Text.translatable("fanwindow.config.functional"));
         generalCategory.addEntry(entryBuilder.startTextDescription(Text.translatable("fanwindow.config.description")).build());
         generalCategory.addEntry(entryBuilder.startBooleanToggle(
                                 Text.translatable("fanwindow.config.useNewTitleScreen"),
@@ -178,6 +181,19 @@ public class ConfigManager {
                         Text.translatable("fanwindow.config.background.versionFeaturedDescription",
                                 DefaultBgPictureGetter.getDefaultBgPicture().getPicName(), FabricLoader.getInstance().getRawGameVersion())
                 ).build());
+        functionalCategory.addEntry(
+                entryBuilder.startBooleanToggle(Text.translatable("fanwindow.config.exitMinecraftConfirm"),
+                        config.isExitMinecraftConfirm())
+                        .setDefaultValue(config.isExitMinecraftConfirm())
+                        .setTooltip(Text.translatable("fanwindow.config.exitMinecraftConfirm.description"))
+                        .setSaveConsumer(newValue -> config.setExitMinecraftConfirm(newValue))
+                        .build());
+        functionalCategory.addEntry(
+                entryBuilder.startBooleanToggle(Text.translatable("fanwindow.config.exitWorldConfirm"),
+                                config.isExitWorldConfirm())
+                        .setDefaultValue(config.isExitWorldConfirm())
+                        .setSaveConsumer(newValue -> config.setExitWorldConfirm(newValue))
+                        .build());
     }
 
     private void saveBgPicture(BgPicture bgPicture) {

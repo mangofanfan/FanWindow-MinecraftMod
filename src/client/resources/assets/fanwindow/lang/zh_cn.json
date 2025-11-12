@@ -27,5 +27,10 @@
   "fanwindow.toast.localIdentifierNotFound.title": "配置目录中未找到本地图片。",
   "fanwindow.toast.localIdentifierNotFound.description": "已回退至默认图片。请确保 custom.png 存在在配置目录中，并重新启动 Minecraft。",
   "fanwindow.config.disableVanillaTitleScreen": "禁用原版标题屏幕",
-  "fanwindow.config.disableVanillaTitleScreen.description": "移除新标题屏幕中切换标题屏幕的按钮，从而在事实上禁用原版标题屏幕。\n若「使用新的芒果窗标题屏幕」启用，此配置无效。"
+  "fanwindow.config.disableVanillaTitleScreen.description": "移除新标题屏幕中切换标题屏幕的按钮，从而在事实上禁用原版标题屏幕。\n若「使用新的芒果窗标题屏幕」启用，此配置无效。",
+  "fanwindow.config.functional": "功能性设置",
+  "fanwindow.config.exitMinecraftConfirm": "退出 Minecraft 时需要确认",
+  "fanwindow.config.exitWorldConfirm": "退出世界时需要确认",
+  "fanwindow.config.exitMinecraftConfirm.description": "需要启用 使用新标题屏幕。",
+  "gui.fanwindow.exit_confirm": "确认退出？"
 }
