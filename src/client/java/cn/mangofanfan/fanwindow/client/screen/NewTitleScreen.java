@@ -237,6 +237,6 @@ public class NewTitleScreen extends Screen {
 
     @Override
     public boolean shouldCloseOnEsc() {
-        return true;
+        return false;
     }
 }
