@@ -23,7 +23,7 @@
   "fanwindow.config.customBackground": "背景设置",
   "fanwindow.config.customBackgroundImageMode": "自定义背景模式",
   "fanwindow.config.customBackgroundImageMode.description": "Disabled: 使用下方选择的、由芒果窗模组提供的背景。\nResourcePack: 使用由资源包提供的背景。\nConfigDir: 使用配置目录中的背景。\n查看下方的文档以获取自定义你的背景的指南。",
-  "fanwindow.config.customBackground.description": "在 Disabled 模式下，你可以从下方选择一张图片作为背景。在 ResourcePack 和 ConfigDir 模式下，你可以任意更改背景图片。\n普遍来说，你可以将模式更改为 ConfigDir，然后将你心爱的图片放入「.minecraft/config/fanwindow」目录，并重命名为「custom.png」，保存更改，然后即可得到新的背景。\n对于 ResourcePack 模式，请参阅本模组的 GitHub 获取更多帮助。\n顺便，如果在配置屏幕中出现奇怪的问题，你可能需要重新启动 Minecraft 来再试试 =w",
+  "fanwindow.config.customBackground.description": "在 Disabled 模式下，你可以从下方选择一张图片作为背景。在 ResourcePack 和 ConfigDir 模式下，你可以任意更改背景图片。\n普遍来说，你可以将模式更改为 ConfigDir，然后将你心爱的图片放入 「.minecraft/config/fanwindow」 目录，并重命名为 「custom.png」 ，保存更改，然后即可得到新的背景。\n如果在配置屏幕中出现奇怪的问题，你可能需要重新启动 Minecraft 来再试试 =w\n请参阅 Github 或 fanfan.moe 来获取更多帮助~",
   "fanwindow.toast.localIdentifierNotFound.title": "配置目录中未找到本地图片。",
   "fanwindow.toast.localIdentifierNotFound.description": "已回退至默认图片。请确保 custom.png 存在在配置目录中，并重新启动 Minecraft。",
   "fanwindow.config.disableVanillaTitleScreen": "禁用原版标题屏幕",
