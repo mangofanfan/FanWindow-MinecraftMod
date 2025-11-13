@@ -32,7 +32,7 @@ public class LocalBackgroundTextureIdentifier {
             // 未找到图片的错误处理
             logger.warn("Error loading Local Background Texture in Config Dir at {}", filePath);
             logger.warn("If your Custom Background Picture Mode is ConfigDir, you will get a default image as background.");
-            toastBuilder.show(Text.translatable("fanwindow.toast.localIdentifierNotFound.title"), Text.translatable("fanwindow.toast.localIdentifierNotFound.description"));
+            toastBuilder.show(Text.translatable("gui.fanwindow.local_identifier_not_found.title"), Text.translatable("gui.fanwindow.local_identifier_not_found.description"));
             identifier = Identifier.of("fanwindow", "textures/artwork/custom.png");
             textureSize = new int[]{1600, 900};
         }
