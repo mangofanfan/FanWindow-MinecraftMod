@@ -32,5 +32,7 @@
   "fanwindow.config.exitMinecraftConfirm": "退出 Minecraft 时需要确认",
   "fanwindow.config.exitWorldConfirm": "退出世界时需要确认",
   "fanwindow.config.exitMinecraftConfirm.description": "需要启用 使用新标题屏幕。",
-  "gui.fanwindow.exit_confirm": "确认退出？"
+  "gui.fanwindow.exit_confirm": "确认退出？",
+  "gui.fanwindow.exit_world_confirm.title": "确认退出世界？",
+  "gui.fanwindow.exit_world_confirm.description": "在30秒内再次点击退出按钮以确认。"
 }

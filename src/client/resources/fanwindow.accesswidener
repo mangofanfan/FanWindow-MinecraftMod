@@ -11,3 +11,6 @@ accessible method net/minecraft/client/gui/screen/world/CreateWorldScreen$WorldT
 accessible method net/minecraft/client/gui/screen/world/CreateWorldScreen$MoreTab <init> (Lnet/minecraft/client/gui/screen/world/CreateWorldScreen;)V
 
 accessible method net/minecraft/client/gui/screen/world/CreateWorldScreen openExperimentsScreen (Lnet/minecraft/resource/DataConfiguration;)V
+
+# 访问加宽 - 字段
+accessible field net/minecraft/client/gui/screen/GameMenuScreen exitButton Lnet/minecraft/client/gui/widget/ButtonWidget;

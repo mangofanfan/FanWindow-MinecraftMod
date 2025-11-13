@@ -7,6 +7,7 @@
     "ClothConfigScreenMixin",
     "CreateWorldScreenMixin",
     "MessageScreenMixin",
+    "MinecraftClientMixin",
     "ScreenMixin",
     "TitleScreenMixin"
   ],

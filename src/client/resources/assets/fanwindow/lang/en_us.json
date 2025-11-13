@@ -32,5 +32,7 @@
   "fanwindow.config.exitMinecraftConfirm": "Need confirm when exit Minecraft client",
   "fanwindow.config.exitWorldConfirm": "Need confirm when exit world",
   "fanwindow.config.exitMinecraftConfirm.description": "Need to enable UseNewTitleScreen.",
-  "gui.fanwindow.exit_confirm": "Confirm to EXIT ?"
+  "gui.fanwindow.exit_confirm": "Confirm to EXIT ?",
+  "gui.fanwindow.exit_world_confirm.title": "Really exit from the world?",
+  "gui.fanwindow.exit_world_confirm.description": "Re-click the button in 30s to confirm it."
 }
