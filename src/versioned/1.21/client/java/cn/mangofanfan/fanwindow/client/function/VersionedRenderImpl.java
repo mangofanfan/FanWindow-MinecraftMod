@@ -4,7 +4,7 @@ import cn.mangofanfan.fanwindow.client.config.ConfigManager;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
 
-public class RenderBackgroundImpl extends RenderBackground {
+public class VersionedRenderImpl extends VersionedRender {
     public void renderBackground(DrawContext context, int[] textureSize, int width, int height, Identifier bgTexture) {
         // 确保渲染背景图片正确，即图片比例不变，且在裁切时总是保持中心位置。
         int[] regionSize = {0, 0};
@@ -12,7 +12,8 @@ public class RenderBackgroundImpl extends RenderBackground {
         double var2 = (double) width / height;
         if (var1 == var2) {
             regionSize = textureSize;
-        } else if (var1 < var2) {
+        }
+        else if (var1 < var2) {
             regionSize[0] = textureSize[0];
             regionSize[1] = (int) (textureSize[1] / var2 * var1);
         }
@@ -32,5 +33,18 @@ public class RenderBackgroundImpl extends RenderBackground {
     public void renderBackground(DrawContext context, int width, int height) {
         ConfigManager configManager = ConfigManager.getInstance();
         renderBackground(context, configManager.getBackgroundTextureSize(), width, height, configManager.getBackgroundTexture());
+    }
+
+    @Override
+    public void fillBackgroundColor(DrawContext context, int x1, int y1, int x2, int y2, int color) {
+        context.fill(x1, y1, x2, y2, color);
+    }
+
+    /**
+     * @param context DrawContext
+     */
+    @Override
+    public void fillBackgroundColor(DrawContext context, int x1, int y1, int x2, int y2) {
+        fillBackgroundColor(context, x1, y1, x2, y2, 0x88000000);
     }
 }

@@ -1,6 +1,7 @@
 package cn.mangofanfan.fanwindow.client.config;
 
 import cn.mangofanfan.fanwindow.client.function.LocalBackgroundTextureIdentifier;
+import cn.mangofanfan.fanwindow.client.function.MinecraftVersionGetter;
 import com.google.gson.Gson;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -179,7 +180,8 @@ public class ConfigManager {
         customBackgroundCategory.addEntry(
                 entryBuilder.startTextDescription(
                         Text.translatable("fanwindow.config.background.versionFeaturedDescription",
-                                DefaultBgPictureGetter.getDefaultBgPicture().getPicName(), FabricLoader.getInstance().getRawGameVersion())
+                                DefaultBgPictureGetter.getDefaultBgPicture().getPicName(),
+                                MinecraftVersionGetter.getMinecraftVersion())
                 ).build());
         functionalCategory.addEntry(
                 entryBuilder.startBooleanToggle(Text.translatable("fanwindow.config.exitMinecraftConfirm"),

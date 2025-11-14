@@ -1,5 +1,6 @@
 package cn.mangofanfan.fanwindow.client.config;
 
+import cn.mangofanfan.fanwindow.client.function.MinecraftVersionGetter;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class DefaultBgPictureGetter {
@@ -9,7 +10,7 @@ public class DefaultBgPictureGetter {
      * @return BgPicture
      */
     public static BgPicture getDefaultBgPicture() {
-        return switch (FabricLoader.getInstance().getRawGameVersion()) {
+        return switch (MinecraftVersionGetter.getMinecraftVersion()) {
             case "1.21", "1.21.1" -> BgPicture.Tricky_Trials_Artwork_png;
             case "1.21.2", "1.21.3" -> BgPicture.Bundles_of_Bravery_Artwork_png;
             case "1.21.4" -> BgPicture.The_Garden_Awakens_Artwork_png;

@@ -21,8 +21,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MinecraftClientMixin {
     @Unique
     private long lastDisconnectTime = 0;
-    @Unique
-    Logger logger = LoggerFactory.getLogger("MinecraftClientMixin");
 
     @Inject(method = "disconnect(Lnet/minecraft/text/Text;)V", at = @At("HEAD"), cancellable = true)
     public void onDisconnect(Text reasonText, CallbackInfo ci) {
@@ -36,7 +34,6 @@ public abstract class MinecraftClientMixin {
                     Text.translatable("gui.fanwindow.exit_world_confirm.title"),
                     Text.translatable("gui.fanwindow.exit_world_confirm.description")
             );
-            logger.info("Re-click disconnect button in 30s to confirm...");
             if (MinecraftClient.getInstance().currentScreen != null) {
                 GameMenuScreen screen = (GameMenuScreen) MinecraftClient.getInstance().currentScreen;
                 if (screen.exitButton != null) {
@@ -46,7 +43,6 @@ public abstract class MinecraftClientMixin {
         }
         else {
             normalDisconnect(reasonText);
-            logger.info("Exit world confirmed.");
         }
         ci.cancel();
     }
@@ -55,7 +51,7 @@ public abstract class MinecraftClientMixin {
     public void normalDisconnect(Text reasonText) {
         // 首先获取 self 对象
         MinecraftClient self = (MinecraftClient)(Object)this;
-        
+
         boolean bl = self.isInSingleplayer();
         ServerInfo serverInfo = self.getCurrentServerEntry();
         if (self.world != null) {
