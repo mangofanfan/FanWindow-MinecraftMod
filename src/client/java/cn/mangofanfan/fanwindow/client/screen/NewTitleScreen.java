@@ -2,7 +2,7 @@ package cn.mangofanfan.fanwindow.client.screen;
 
 import cn.mangofanfan.fanwindow.client.GlobalState;
 import cn.mangofanfan.fanwindow.client.config.ConfigManager;
-import cn.mangofanfan.fanwindow.client.function.RenderBackgroundImpl;
+import cn.mangofanfan.fanwindow.client.function.VersionedRenderImpl;
 import cn.mangofanfan.fanwindow.client.function.SimpleToastBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -89,7 +89,12 @@ public class NewTitleScreen extends Screen {
                 .dimensions(cenX, cenY + 65, 60, 60)
                 .build();
         this.quitButton = ButtonWidget.builder(Text.translatable("menu.quit"),
-                button -> client.scheduleStop())
+                button -> {
+                    if (configManager.config.isExitMinecraftConfirm())
+                        client.setScreen(new ExitConfirmScreen(Text.of("T-T")));
+                    else
+                        client.scheduleStop();
+                })
                 .dimensions(cenX + 65, cenY + 65, 60, 60)
                 .build();
         this.toggleButton = this.getToggleButtonBuilder()
@@ -221,17 +226,17 @@ public class NewTitleScreen extends Screen {
             super.renderBackground(context, mouseX, mouseY, deltaTicks);
         }
         else {
-            new RenderBackgroundImpl().renderBackground(context, width, height);
+            new VersionedRenderImpl().renderBackground(context, width, height);
         }
     }
 
     @Override
-    protected void renderDarkening(DrawContext context) {}
+    public boolean shouldPause() {
+        return false;
+    }
 
     @Override
-    public void close() {
-        if (client != null) {
-            client.setScreen(new TitleScreen());
-        }
+    public boolean shouldCloseOnEsc() {
+        return false;
     }
 }

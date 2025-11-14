@@ -13,7 +13,9 @@ public class FanWindowConfig {
     private boolean useNewBackgroundInNewScreen = true;
     private boolean useNewCreateWorldScreen = true;
     private CustomPictureMode customPictureMode = CustomPictureMode.Disabled;
-    private BgPicture bgPicture = BgPicture.Spring_to_Life_Artwork_png;
+    private BgPicture bgPicture = DefaultBgPictureGetter.getDefaultBgPicture();
+    private boolean exitMinecraftConfirm = true;
+    private boolean exitWorldConfirm = true;
 
     public boolean isUseNewTitleScreen() {
         return useNewTitleScreen;
@@ -69,5 +71,21 @@ public class FanWindowConfig {
 
     public void setDisableVanillaTitleScreen(boolean disableVanillaTitleScreen) {
         this.disableVanillaTitleScreen = disableVanillaTitleScreen;
+    }
+
+    public boolean isExitMinecraftConfirm() {
+        return exitMinecraftConfirm;
+    }
+
+    public void setExitMinecraftConfirm(boolean exitMinecraftConfirm) {
+        this.exitMinecraftConfirm = exitMinecraftConfirm;
+    }
+
+    public boolean isExitWorldConfirm() {
+        return exitWorldConfirm;
+    }
+
+    public void setExitWorldConfirm(boolean exitWorldConfirm) {
+        this.exitWorldConfirm = exitWorldConfirm;
     }
 }

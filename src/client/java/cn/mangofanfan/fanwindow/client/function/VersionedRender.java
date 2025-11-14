@@ -3,7 +3,10 @@ package cn.mangofanfan.fanwindow.client.function;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
 
-public abstract class RenderBackground {
+/**
+ * 因为 Minecraft 版本变化而需要差异化的方法
+ */
+public abstract class VersionedRender {
     public abstract void renderBackground(DrawContext context, int[] textureSize, int width, int height, Identifier bgTexture);
 
     /**
@@ -13,4 +16,8 @@ public abstract class RenderBackground {
      * @param height 游戏屏幕高度
      */
     public abstract void renderBackground(DrawContext context, int width, int height);
+
+    public abstract void fillBackgroundColor(DrawContext context, int x1, int y1, int x2, int y2, int color);
+
+    public abstract void fillBackgroundColor(DrawContext context, int x1, int y1, int x2, int y2);
 }

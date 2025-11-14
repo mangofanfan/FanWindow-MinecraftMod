@@ -6,7 +6,9 @@
   "client": [
     "ClothConfigScreenMixin",
     "CreateWorldScreenMixin",
+    "GameMenuScreenMixin",
     "MessageScreenMixin",
+    "MinecraftClientMixin",
     "ScreenMixin",
     "TitleScreenMixin"
   ],

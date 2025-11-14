@@ -1,6 +1,6 @@
 package cn.mangofanfan.fanwindow.mixin.client;
 
-import cn.mangofanfan.fanwindow.client.function.RenderBackgroundImpl;
+import cn.mangofanfan.fanwindow.client.function.VersionedRenderImpl;
 import cn.mangofanfan.fanwindow.client.config.ConfigManager;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.MessageScreen;
@@ -20,7 +20,7 @@ public class MessageScreenMixin extends Screen {
     @Inject(method = "renderBackground", at = @At("HEAD"), cancellable = true)
     public void onRenderBackground(DrawContext context, int mouseX, int mouseY, float deltaTicks, CallbackInfo ci) {
         if (ConfigManager.getInstance().config.isUseNewBackgroundGlobally()) {
-            new RenderBackgroundImpl().renderBackground(context, this.width, this.height);
+            new VersionedRenderImpl().renderBackground(context, this.width, this.height);
             ci.cancel();
         }
     }

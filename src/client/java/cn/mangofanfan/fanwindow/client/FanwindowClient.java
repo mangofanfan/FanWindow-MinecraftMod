@@ -1,5 +1,6 @@
 package cn.mangofanfan.fanwindow.client;
 
+import cn.mangofanfan.fanwindow.client.function.MinecraftVersionGetter;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ public class FanwindowClient implements ClientModInitializer {
 
         Logger logger = LoggerFactory.getLogger("FanWindowClient");
         GlobalState globalState = GlobalState.getInstance();
+        logger.info("Running on Minecraft Version: {}", MinecraftVersionGetter.getMinecraftVersion());
 
         if (FabricLoader.getInstance().isModLoaded("modmenu")) {
             logger.info("ModMenu is loaded. Specifical support enabled.");

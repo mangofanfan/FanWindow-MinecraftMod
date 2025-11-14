@@ -1,6 +1,6 @@
 package cn.mangofanfan.fanwindow.mixin.client;
 
-import cn.mangofanfan.fanwindow.client.function.RenderBackgroundImpl;
+import cn.mangofanfan.fanwindow.client.function.VersionedRenderImpl;
 import cn.mangofanfan.fanwindow.client.config.ConfigManager;
 import com.llamalad7.mixinextras.sugar.Local;
 import me.shedaniel.clothconfig2.gui.ClothConfigScreen;
@@ -26,7 +26,7 @@ public class ClothConfigScreenMixin extends Screen {
     )
     public void onRenderBackground(ClothConfigScreen instance, DrawContext context, float v, @Local(argsOnly = true) float deltaTick) {
         if (ConfigManager.getInstance().config.isUseNewBackgroundGlobally()) {
-            new RenderBackgroundImpl().renderBackground(context, instance.width, instance.height);
+            new VersionedRenderImpl().renderBackground(context, instance.width, instance.height);
         }
         else {
             this.renderPanoramaBackground(context, deltaTick);

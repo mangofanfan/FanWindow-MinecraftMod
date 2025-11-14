@@ -47,6 +47,46 @@ ext {
                     versioned_scr: v1215_versioned_scr,
                     publish_minecraft_version: "1.21.5",
                     mod_sign: "mc1.21.5"
+            ],
+            "1.21.6": [
+                    yarn_mappings: v1216_yarn_mappings,
+                    cloth_config_api_version: v1216_cloth_config_api_version,
+                    modmenu_version: v1216_modmenu_version,
+                    versioned_scr: v1216_versioned_scr,
+                    publish_minecraft_version: ">=1.21.6 <1.21.9",
+                    mod_sign: "mc1.21.6+mc1.21.7+mc1.21.8"
+            ],
+            "1.21.7": [
+                    yarn_mappings: v1217_yarn_mappings,
+                    cloth_config_api_version: v1217_cloth_config_api_version,
+                    modmenu_version: v1217_modmenu_version,
+                    versioned_scr: v1217_versioned_scr,
+                    publish_minecraft_version: ">=1.21.6 <1.21.9",
+                    mod_sign: "mc1.21.6+mc1.21.7+mc1.21.8"
+            ],
+            "1.21.8": [
+                    yarn_mappings: v1218_yarn_mappings,
+                    cloth_config_api_version: v1218_cloth_config_api_version,
+                    modmenu_version: v1218_modmenu_version,
+                    versioned_scr: v1218_versioned_scr,
+                    publish_minecraft_version: ">=1.21.6 <1.21.9",
+                    mod_sign: "mc1.21.6+mc1.21.7+mc1.21.8"
+            ],
+            "1.21.9": [
+                    yarn_mappings: v1219_yarn_mappings,
+                    cloth_config_api_version: v1219_cloth_config_api_version,
+                    modmenu_version: v1219_modmenu_version,
+                    versioned_scr: v1219_versioned_scr,
+                    publish_minecraft_version: ">=1.21.9 <1.21.11",
+                    mod_sign: "mc1.21.9+mc1.21.10"
+            ],
+            "1.21.10": [
+                    yarn_mappings: v12110_yarn_mappings,
+                    cloth_config_api_version: v12110_cloth_config_api_version,
+                    modmenu_version: v12110_modmenu_version,
+                    versioned_scr: v12110_versioned_scr,
+                    publish_minecraft_version: ">=1.21.9 <1.21.11",
+                    mod_sign: "mc1.21.9+mc1.21.10"
             ]
     ]
 }

@@ -1,6 +1,10 @@
 pluginManagement {
     repositories {
         maven {
+            name = "fanfan"
+            url = "https://maven.fanfan.moe/repository/maven-public/"
+        }
+        maven {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
