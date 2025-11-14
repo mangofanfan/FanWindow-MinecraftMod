@@ -1,7 +1,6 @@
 package cn.mangofanfan.fanwindow.client.config;
 
 import cn.mangofanfan.fanwindow.client.function.MinecraftVersionGetter;
-import net.fabricmc.loader.api.FabricLoader;
 
 public class DefaultBgPictureGetter {
     /**
