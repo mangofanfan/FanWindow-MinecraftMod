@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "ClothConfigScreenMixin",
+    "ConnectScreenMixin",
     "CreateWorldScreenMixin",
+    "DisconnectedScreenMixin",
     "GameMenuScreenMixin",
     "MessageScreenMixin",
     "MinecraftClientMixin",
