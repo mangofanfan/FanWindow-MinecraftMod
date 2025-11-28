@@ -20,6 +20,7 @@ import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextIconButtonWidget;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,7 @@ public class NewTitleScreen extends Screen {
     // 切换按钮
     private volatile ButtonWidget toggleButton;
     // 语言
-    private volatile TextIconButtonWidget languageOptionButton;
+    private volatile ButtonWidget languageOrReplayButton;
     // 无障碍
     private volatile TextIconButtonWidget accessibilityOptionButton;
     // 版权
@@ -100,11 +101,9 @@ public class NewTitleScreen extends Screen {
         this.toggleButton = this.getToggleButtonBuilder()
                 .dimensions(cenX + 130, cenY, 27, 27)
                 .build();
-        this.languageOptionButton = AccessibilityOnboardingButtons.createLanguageButton(27,
-                button -> client.setScreen(new LanguageOptionsScreen(this, client.options, client.getLanguageManager())),
-                true);
-        this.languageOptionButton.setHeight(27);
-        this.languageOptionButton.setPosition(cenX + 130, cenY + 33);
+        this.languageOrReplayButton = this.getLanguageOrReplayButton();
+        this.languageOrReplayButton.setHeight(27);
+        this.languageOrReplayButton.setPosition(cenX + 130, cenY + 33);
         this.accessibilityOptionButton = AccessibilityOnboardingButtons.createAccessibilityButton(27,
                 button -> client.setScreen(new AccessibilityOptionsScreen(this, client.options)),
                 true);
@@ -120,7 +119,7 @@ public class NewTitleScreen extends Screen {
         this.addDrawableChild(optionsButton);
         this.addDrawableChild(quitButton);
         this.addDrawableChild(toggleButton);
-        this.addDrawableChild(languageOptionButton);
+        this.addDrawableChild(languageOrReplayButton);
         this.addDrawableChild(accessibilityOptionButton);
         this.addDrawableChild(copyrightButton);
 
@@ -203,6 +202,25 @@ public class NewTitleScreen extends Screen {
         // 否则，创建打开模组菜单或配置屏幕的按钮
         else {
             return getModsButtonBuilder(Text.of("</>"), Text.of("</>"));
+        }
+    }
+
+    /**
+     * 如果同时加载了 ReplayMod，则将语言按钮替换为 ReplayMod 的回放按钮。
+     * @return TextIconButtonWidget
+     */
+    private TextIconButtonWidget getLanguageOrReplayButton() {
+        if (GlobalState.getInstance().isReplayModSupport()) {
+            return TextIconButtonWidget.builder(
+                    Text.translatable("replaymod.gui.replayviewer"),
+                    button -> client.setScreen(cn.mangofanfan.fanwindow.client.function.ReplayModScreenGetter.getReplayModScreen()),
+                    true
+            ).width(27).texture(Identifier.of("fanwindow", "icon/replay_button"), 16, 16).build();
+        }
+        else {
+            return AccessibilityOnboardingButtons.createLanguageButton(27,
+                    button -> client.setScreen(new LanguageOptionsScreen(this, client.options, client.getLanguageManager())),
+                    true);
         }
     }
 

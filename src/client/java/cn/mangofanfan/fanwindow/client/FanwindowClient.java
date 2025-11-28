@@ -16,11 +16,12 @@ public class FanwindowClient implements ClientModInitializer {
         logger.info("Running on Minecraft Version: {}", MinecraftVersionGetter.getMinecraftVersion());
 
         if (FabricLoader.getInstance().isModLoaded("modmenu")) {
-            logger.info("ModMenu is loaded. Specifical support enabled.");
+            logger.info("ModMenu is loaded.");
             globalState.setModMenuSupport(true);
         }
-        else {
-            logger.info("Not found ModMenu.");
+        if (FabricLoader.getInstance().isModLoaded("replaymod")) {
+            logger.info("ReplayMod is loaded.");
+            globalState.setReplayModSupport(true);
         }
     }
 }
