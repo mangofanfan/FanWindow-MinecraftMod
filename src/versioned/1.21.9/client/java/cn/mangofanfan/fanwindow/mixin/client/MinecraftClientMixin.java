@@ -4,10 +4,6 @@ import cn.mangofanfan.fanwindow.client.config.ConfigManager;
 import cn.mangofanfan.fanwindow.client.function.SimpleToastBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.GameMenuScreen;
-import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
-import net.minecraft.client.network.ServerInfo;
-import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -38,37 +34,7 @@ public abstract class MinecraftClientMixin {
                     screen.exitButton.active = true;
                 }
             }
-        }
-        else {
-            normalDisconnect(reasonText);
-        }
-        ci.cancel();
-    }
-
-    @Unique
-    public void normalDisconnect(Text reasonText) {
-        // 首先获取 self 对象
-        MinecraftClient self = (MinecraftClient)(Object)this;
-
-        boolean bl = self.isInSingleplayer();
-        ServerInfo serverInfo = self.getCurrentServerEntry();
-        if (self.world != null) {
-            self.world.disconnect(reasonText);
-        }
-
-        if (bl) {
-            self.disconnectWithSavingScreen();
-        } else {
-            self.disconnectWithProgressScreen();
-        }
-
-        TitleScreen titleScreen = new TitleScreen();
-        if (bl) {
-            self.setScreen(titleScreen);
-        } else if (serverInfo != null && serverInfo.isRealm()) {
-            self.setScreen(new RealmsMainScreen(titleScreen));
-        } else {
-            self.setScreen(new MultiplayerScreen(titleScreen));
+            ci.cancel();
         }
     }
 }

@@ -29,14 +29,20 @@
   "fanwindow.config.disableVanillaTitleScreen": "禁用原版标题屏幕",
   "fanwindow.config.disableVanillaTitleScreen.description": "移除新标题屏幕中切换标题屏幕的按钮，从而在事实上禁用原版标题屏幕。\n若「使用新的芒果窗标题屏幕」启用，此配置无效。",
   "fanwindow.config.functional": "功能性设置",
-  "fanwindow.config.exitMinecraftConfirm": "退出 Minecraft 时需要确认",
   "fanwindow.config.exitWorldConfirm": "退出世界时需要确认",
+  "fanwindow.config.exitMinecraftConfirm": "退出 Minecraft 时需要确认",
+  "fanwindow.config.exitWorldConfirm.description": "30 秒内再次点击以确认。",
   "fanwindow.config.exitMinecraftConfirm.description": "需要启用 使用新标题屏幕。",
+  "fanwindow.config.enableAutoReconnect": "失去连接时自动重新连接",
+  "fanwindow.config.enableAutoReconnect.description": "在下方设置重新连接前的等待时间。",
+  "fanwindow.config.autoReconnectWaitTime": "等待重新连接时间",
+  "fanwindow.config.autoReconnectWaitTime.description": "（秒）",
 
   "gui.fanwindow.local_identifier_not_found.title": "配置目录中未找到本地图片。",
   "gui.fanwindow.local_identifier_not_found.description": "已回退至默认图片。请确保 custom.png 存在在配置目录中，并重新启动 Minecraft。",
   "gui.fanwindow.exit_confirm": "确认退出？",
   "gui.fanwindow.exit_world_confirm.title": "确认退出世界？",
   "gui.fanwindow.exit_world_confirm.description": "在30秒内再次点击退出按钮以确认。",
-  "gui.fanwindow.reconnect": "重新连接"
+  "gui.fanwindow.reconnect": "重新连接",
+  "gui.fanwindow.auto_reconnect": "%1$s 秒后重新连接"
 }

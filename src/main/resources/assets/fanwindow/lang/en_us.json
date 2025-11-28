@@ -29,14 +29,20 @@
   "fanwindow.config.disableVanillaTitleScreen": "Disable vanilla Title Screen",
   "fanwindow.config.disableVanillaTitleScreen.description": "Remove the button to toggle Title Screen in New Title Screen to disable vanilla Title Screen in fact.\nIf 「Use New FanWindow Title Screen」 is FALSE, this will be ignored.",
   "fanwindow.config.functional": "Functional Config",
-  "fanwindow.config.exitMinecraftConfirm": "Need confirm when exit Minecraft client",
   "fanwindow.config.exitWorldConfirm": "Need confirm when exit world",
+  "fanwindow.config.exitWorldConfirm.description": "ReClick the button in 30s to confirm it.",
+  "fanwindow.config.exitMinecraftConfirm": "Need confirm when exit Minecraft client",
   "fanwindow.config.exitMinecraftConfirm.description": "Need to enable UseNewTitleScreen.",
+  "fanwindow.config.enableAutoReconnect": "Enable auto reconnect when lost connection",
+  "fanwindow.config.enableAutoReconnect.description": "Set time interval to reconnect when lost connection below.",
+  "fanwindow.config.autoReconnectWaitTime": "Time for waiting when lost connection",
+  "fanwindow.config.autoReconnectWaitTime.description": "(Seconds)",
 
   "gui.fanwindow.local_identifier_not_found.title": "Local picture in config dir NOT FOUND.",
   "gui.fanwindow.local_identifier_not_found.description": "Fall back to Default picture. Please check your config dir to make sure custom.png is existed and restart Minecraft.",
   "gui.fanwindow.exit_confirm": "Confirm to EXIT ?",
   "gui.fanwindow.exit_world_confirm.title": "Really exit from the world?",
   "gui.fanwindow.exit_world_confirm.description": "Re-click the button in 30s to confirm it.",
-  "gui.fanwindow.reconnect": "Reconnect"
+  "gui.fanwindow.reconnect": "Reconnect",
+  "gui.fanwindow.auto_reconnect": "Reconnect in %1$s seconds"
 }
