@@ -1,10 +1,12 @@
 {
   "modmenu.nameTranslation.fanwindow": "FanWindow",
   "modmenu.descriptionTranslation.fanwindow": "Have a different Title Screen !\nThis mod provides a new title screen to replace the vanilla title screen, and allow you replace all vanilla background. Created by Java, and can work with ModMenu.",
+
   "fanwindow.modmenu.website": "Website",
   "fanwindow.modmenu.afdian": "AFDIAN",
   "fanwindow.modmenu.modsScreenFailed.title": "Error occurred when working with [ModMenu].",
   "fanwindow.modmenu.modsScreenFailed.description": "Exception occurred when trying to init ModsScreen. Please contact with [FanWindow].",
+
   "fanwindow.config": "Window Config",
   "fanwindow.config.title": "FanWindow Config",
   "fanwindow.config.useNewTitleScreen": "Use New FanWindow Title Screen",
@@ -24,15 +26,23 @@
   "fanwindow.config.customBackgroundImageMode": "Custom Background Picture Mode",
   "fanwindow.config.customBackgroundImageMode.description": "Disabled: using Picture chosen below, provided by Fan Window mod.\nResourcePack: using Picture provided in resourcepack.\nConfigDir: using Picture in Config Dir.\nSee document below for guidance to change your custom background.",
   "fanwindow.config.customBackground.description": "In Disabled mode, you can use one picture chosen below as background. In ResourcePack mode and ConfigDir mode you can change the background image through your heart.\nFor most player, you can toggle mode to ConfigDir, and move your beloved image (png) into 「.minecraft/config/fanwindow」 dir, rename it to 「custom.png」, and save your changes. Soon you can enjoy a new background image.\nIf anything in Config Screen goes wrong, you might need to restart Minecraft to make it great again =w\nFor more help, please visit Github or fanfan.moe ~",
-  "gui.fanwindow.local_identifier_not_found.title": "Local picture in config dir NOT FOUND.",
-  "gui.fanwindow.local_identifier_not_found.description": "Fall back to Default picture. Please check your config dir to make sure custom.png is existed and restart Minecraft.",
   "fanwindow.config.disableVanillaTitleScreen": "Disable vanilla Title Screen",
   "fanwindow.config.disableVanillaTitleScreen.description": "Remove the button to toggle Title Screen in New Title Screen to disable vanilla Title Screen in fact.\nIf 「Use New FanWindow Title Screen」 is FALSE, this will be ignored.",
   "fanwindow.config.functional": "Functional Config",
-  "fanwindow.config.exitMinecraftConfirm": "Need confirm when exit Minecraft client",
   "fanwindow.config.exitWorldConfirm": "Need confirm when exit world",
+  "fanwindow.config.exitWorldConfirm.description": "ReClick the button in 30s to confirm it.",
+  "fanwindow.config.exitMinecraftConfirm": "Need confirm when exit Minecraft client",
   "fanwindow.config.exitMinecraftConfirm.description": "Need to enable UseNewTitleScreen.",
+  "fanwindow.config.enableAutoReconnect": "Enable auto reconnect when lost connection",
+  "fanwindow.config.enableAutoReconnect.description": "Set time interval to reconnect when lost connection below.",
+  "fanwindow.config.autoReconnectWaitTime": "Time for waiting when lost connection",
+  "fanwindow.config.autoReconnectWaitTime.description": "(Seconds)",
+
+  "gui.fanwindow.local_identifier_not_found.title": "Local picture in config dir NOT FOUND.",
+  "gui.fanwindow.local_identifier_not_found.description": "Fall back to Default picture. Please check your config dir to make sure custom.png is existed and restart Minecraft.",
   "gui.fanwindow.exit_confirm": "Confirm to EXIT ?",
   "gui.fanwindow.exit_world_confirm.title": "Really exit from the world?",
-  "gui.fanwindow.exit_world_confirm.description": "Re-click the button in 30s to confirm it."
+  "gui.fanwindow.exit_world_confirm.description": "Re-click the button in 30s to confirm it.",
+  "gui.fanwindow.reconnect": "Reconnect",
+  "gui.fanwindow.auto_reconnect": "Reconnect in %1$s seconds"
 }

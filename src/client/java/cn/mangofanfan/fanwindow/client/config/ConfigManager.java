@@ -184,17 +184,32 @@ public class ConfigManager {
                                 MinecraftVersionGetter.getMinecraftVersion())
                 ).build());
         functionalCategory.addEntry(
+                entryBuilder.startBooleanToggle(Text.translatable("fanwindow.config.exitWorldConfirm"),
+                                config.isExitWorldConfirm())
+                        .setTooltip(Text.translatable("fanwindow.config.exitWorldConfirm.description"))
+                        .setDefaultValue(config.isExitWorldConfirm())
+                        .setSaveConsumer(newValue -> config.setExitWorldConfirm(newValue))
+                        .build());
+        functionalCategory.addEntry(
                 entryBuilder.startBooleanToggle(Text.translatable("fanwindow.config.exitMinecraftConfirm"),
-                        config.isExitMinecraftConfirm())
+                                config.isExitMinecraftConfirm())
                         .setDefaultValue(config.isExitMinecraftConfirm())
                         .setTooltip(Text.translatable("fanwindow.config.exitMinecraftConfirm.description"))
                         .setSaveConsumer(newValue -> config.setExitMinecraftConfirm(newValue))
                         .build());
         functionalCategory.addEntry(
-                entryBuilder.startBooleanToggle(Text.translatable("fanwindow.config.exitWorldConfirm"),
-                                config.isExitWorldConfirm())
-                        .setDefaultValue(config.isExitWorldConfirm())
-                        .setSaveConsumer(newValue -> config.setExitWorldConfirm(newValue))
+                entryBuilder.startBooleanToggle(Text.translatable("fanwindow.config.enableAutoReconnect"),
+                                config.isEnableAutoReconnect())
+                        .setDefaultValue(config.isEnableAutoReconnect())
+                        .setTooltip(Text.translatable("fanwindow.config.enableAutoReconnect.description"))
+                        .setSaveConsumer(newValue -> config.setEnableAutoReconnect(newValue))
+                        .build());
+        functionalCategory.addEntry(
+                entryBuilder.startIntField(Text.translatable("fanwindow.config.autoReconnectWaitTime"),
+                                config.getAutoReconnectWaitTime())
+                        .setDefaultValue(config.getAutoReconnectWaitTime())
+                        .setTooltip(Text.translatable("fanwindow.config.autoReconnectWaitTime.description"))
+                        .setSaveConsumer(newValue -> config.setAutoReconnectWaitTime(newValue))
                         .build());
     }
 
