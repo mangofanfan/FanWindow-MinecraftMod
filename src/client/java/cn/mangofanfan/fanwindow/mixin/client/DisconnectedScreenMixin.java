@@ -38,6 +38,9 @@ public abstract class DisconnectedScreenMixin extends Screen {
     private DirectionalLayoutWidget grid;
 
     @Unique
+    private final MinecraftClient client = MinecraftClient.getInstance();
+
+    @Unique
     ButtonWidget reConnectButton;
 
     @Unique
@@ -79,7 +82,9 @@ public abstract class DisconnectedScreenMixin extends Screen {
                     }
                 client.execute(this::reConnect);
             }
-        } catch (InterruptedException ignored) { }
+        } catch (InterruptedException ignored) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     @Unique
@@ -95,8 +100,7 @@ public abstract class DisconnectedScreenMixin extends Screen {
     }
 
     @Override
-    public void close() {
-        executor.close();
-        super.close();
+    public void removed() {
+        executor.shutdownNow();
     }
 }

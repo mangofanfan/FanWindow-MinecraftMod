@@ -24,9 +24,6 @@
     "client": [
       "cn.mangofanfan.fanwindow.client.FanwindowClient"
     ],
-    "main": [
-      "cn.mangofanfan.fanwindow.Fanwindow"
-    ],
     "modmenu": [
       "cn.mangofanfan.fanwindow.modmenu.FanWindowMenuApiImpl"
     ]
@@ -45,7 +42,9 @@
     "cloth-config": "${cloth_config_api_version}"
   },
   "suggests": {
-    "modmenu": ">=${modmenu_version}"
+    "modmenu": "*",
+    "fabric-api": "*",
+    "replaymod": "*"
   },
   "custom": {
     "modmenu": {

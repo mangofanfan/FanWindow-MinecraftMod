@@ -19,6 +19,8 @@ if (project.hasProperty('target_version')) {
     project.ext.yarn_mappings = config.yarn_mappings
     project.ext.cloth_config_api_version = config.cloth_config_api_version
     project.ext.modmenu_version = config.modmenu_version
+    project.ext.fabric_api_version = config.fabric_api_version
+    project.ext.replaymod_version = config.replaymod_version
     project.ext.versioned_scr = config.versioned_scr
     project.ext.publish_minecraft_version = config.publish_minecraft_version
     project.ext.mod_sign = config.mod_sign
@@ -79,13 +81,13 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.target_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:0.138.3+1.21.10"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
     modApi "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_api_version}"
 
     modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-    modCompileOnly "maven.modrinth:replaymod:1.21.10-2.6.24"
-    modImplementation "maven.modrinth:replaymod:1.21.10-2.6.24"
+    modCompileOnly "maven.modrinth:replaymod:${project.replaymod_version}"
+    modImplementation "maven.modrinth:replaymod:${project.replaymod_version}"
 }
 
 processResources {
@@ -100,8 +102,7 @@ processResources {
         expand "version": version,
                 "publish_minecraft_version": publish_minecraft_version,
                 "loader_version": loader_version,
-                "cloth_config_api_version": cloth_config_api_version,
-                "modmenu_version": modmenu_version
+                "cloth_config_api_version": cloth_config_api_version
     }
 }
 
